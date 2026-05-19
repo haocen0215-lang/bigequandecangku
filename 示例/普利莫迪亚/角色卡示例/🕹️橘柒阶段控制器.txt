@@ -1,0 +1,25 @@
+@@preprocessing
+<%
+if (typeof juqiAffection === 'undefined') var juqiAffection = getvar('stat_data.配角.橘柒.亲密度', { defaults: 1 });
+var juqiExists = getvar('stat_data.配角.橘柒', { defaults: null });
+%>
+
+<% if (juqiExists !== null) { %>
+<% if (juqiAffection == 1) { %>
+<%- await getwi('🕹️橘柒阶段_1_陌生人') %>
+<% } else if (juqiAffection == 2) { %>
+<%- await getwi('🕹️橘柒阶段_2_雇主') %>
+<% } else if (juqiAffection == 3) { %>
+<%- await getwi('🕹️橘柒阶段_3_相熟') %>
+<% } else if (juqiAffection == 4) { %>
+<%- await getwi('🕹️橘柒阶段_4_在意') %>
+<% } else if (juqiAffection == 5) { %>
+<%- await getwi('🕹️橘柒阶段_5_暧昧') %>
+<% } else if (juqiAffection == 6) { %>
+<%- await getwi('🕹️橘柒阶段_6_恋人初期') %>
+<% } else if (juqiAffection == 7) { %>
+<%- await getwi('🕹️橘柒阶段_7_恋人深层') %>
+<% } else if (juqiAffection == 8) { %>
+<%- await getwi('🕹️橘柒阶段_8_不可分割') %>
+<% } %>
+<% } %>

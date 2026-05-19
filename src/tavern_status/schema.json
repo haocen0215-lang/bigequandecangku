@@ -1,0 +1,582 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "世界": {
+      "default": {},
+      "type": "object",
+      "properties": {
+        "当前日期": {
+          "default": "待初始化",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "string",
+              "const": "待初始化"
+            }
+          ]
+        },
+        "当前时间": {
+          "default": "待初始化",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "string",
+              "const": "待初始化"
+            }
+          ]
+        },
+        "天气": {
+          "default": "待初始化",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "string",
+              "const": "待初始化"
+            }
+          ]
+        },
+        "当前位置": {
+          "default": "待初始化",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "string",
+              "const": "待初始化"
+            }
+          ]
+        },
+        "声望": {
+          "default": "待初始化",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "string",
+              "const": "待初始化"
+            }
+          ]
+        },
+        "金钱": {
+          "default": {},
+          "type": "object",
+          "properties": {
+            "秘银币": {
+              "default": 0,
+              "type": "number"
+            },
+            "铂金币": {
+              "default": 0,
+              "type": "number"
+            },
+            "金币": {
+              "default": 0,
+              "type": "number"
+            },
+            "银币": {
+              "default": 0,
+              "type": "number"
+            },
+            "铜币": {
+              "default": 0,
+              "type": "number"
+            }
+          }
+        }
+      }
+    },
+    "酒馆": {
+      "default": {},
+      "type": "object",
+      "properties": {
+        "名称": {
+          "default": "待初始化",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "string",
+              "const": "待初始化"
+            }
+          ]
+        },
+        "所在城市": {
+          "default": "待初始化",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "string",
+              "const": "待初始化"
+            }
+          ]
+        },
+        "整体风格": {
+          "default": "待初始化",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "string",
+              "const": "待初始化"
+            }
+          ]
+        },
+        "区域列表": {
+          "default": {},
+          "type": "object",
+          "propertyNames": {
+            "type": "string"
+          },
+          "additionalProperties": {
+            "default": {},
+            "type": "object",
+            "properties": {
+              "状态": {
+                "default": "正常",
+                "type": "string"
+              },
+              "描述": {
+                "default": "",
+                "type": "string"
+              },
+              "设施标签": {
+                "default": [],
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "子空间": {
+                "default": {},
+                "type": "object",
+                "propertyNames": {
+                  "type": "string"
+                },
+                "additionalProperties": {
+                  "default": {},
+                  "type": "object",
+                  "properties": {
+                    "状态": {
+                      "default": "正常",
+                      "type": "string"
+                    },
+                    "描述": {
+                      "default": "",
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "进行中的制作": {
+          "default": {},
+          "type": "object",
+          "propertyNames": {
+            "type": "string"
+          },
+          "additionalProperties": {
+            "default": {},
+            "type": "object",
+            "properties": {
+              "容器": {
+                "default": "",
+                "type": "string"
+              },
+              "所在区域": {
+                "default": "",
+                "type": "string"
+              },
+              "当前状态": {
+                "default": "准备中",
+                "type": "string"
+              },
+              "开始": {
+                "default": "待初始化",
+                "type": "string"
+              },
+              "预计完成": {
+                "default": "待初始化",
+                "type": "string"
+              },
+              "剩余量感": {
+                "default": "",
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "库存": {
+      "default": {},
+      "type": "object",
+      "propertyNames": {
+        "type": "string"
+      },
+      "additionalProperties": {
+        "default": {},
+        "type": "object",
+        "properties": {
+          "数量": {
+            "default": 0,
+            "type": "number"
+          },
+          "单位": {
+            "default": "份",
+            "type": "string"
+          },
+          "分类": {
+            "default": "其他",
+            "type": "string",
+            "enum": [
+              "食材",
+              "调料",
+              "成品",
+              "其他"
+            ]
+          },
+          "售价铜币": {
+            "default": 0,
+            "type": "number"
+          },
+          "风味标签": {
+            "default": [],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "烹饪手法": {
+            "default": "",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "购物": {
+      "default": {},
+      "type": "object",
+      "properties": {
+        "店铺列表": {
+          "default": {},
+          "type": "object",
+          "propertyNames": {
+            "type": "string"
+          },
+          "additionalProperties": {
+            "default": {},
+            "type": "object",
+            "properties": {
+              "所在位置": {
+                "default": "",
+                "type": "string"
+              },
+              "描述": {
+                "default": "",
+                "type": "string"
+              },
+              "商品列表": {
+                "default": {},
+                "type": "object",
+                "propertyNames": {
+                  "type": "string"
+                },
+                "additionalProperties": {
+                  "default": {},
+                  "type": "object",
+                  "properties": {
+                    "分类": {
+                      "default": "其他",
+                      "type": "string",
+                      "enum": [
+                        "食材",
+                        "调料",
+                        "成品",
+                        "其他"
+                      ]
+                    },
+                    "单位": {
+                      "default": "份",
+                      "type": "string"
+                    },
+                    "单价铜币": {
+                      "default": 0,
+                      "type": "number"
+                    },
+                    "备注": {
+                      "default": "",
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "账本": {
+      "default": {},
+      "type": "object",
+      "properties": {
+        "经营足迹": {
+          "default": {},
+          "type": "object",
+          "properties": {
+            "累计营业天数": {
+              "default": 0,
+              "type": "number"
+            },
+            "累计接待客人数": {
+              "default": 0,
+              "type": "number"
+            },
+            "累计客房入住": {
+              "default": 0,
+              "type": "number"
+            }
+          }
+        },
+        "金银流转": {
+          "default": {},
+          "type": "object",
+          "properties": {
+            "累计总收入铜币": {
+              "default": 0,
+              "type": "number"
+            }
+          }
+        },
+        "当前总资产": {
+          "default": {},
+          "type": "object",
+          "properties": {
+            "秘银币": {
+              "default": 0,
+              "type": "number"
+            },
+            "铂金币": {
+              "default": 0,
+              "type": "number"
+            },
+            "金币": {
+              "default": 0,
+              "type": "number"
+            },
+            "银币": {
+              "default": 0,
+              "type": "number"
+            },
+            "铜币": {
+              "default": 0,
+              "type": "number"
+            },
+            "折算合计铜币": {
+              "default": 0,
+              "type": "number"
+            }
+          }
+        }
+      }
+    },
+    "玩家": {
+      "type": "object",
+      "properties": {
+        "基本信息": {
+          "default": {},
+          "type": "object",
+          "properties": {
+            "姓名": {
+              "default": "待初始化",
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string",
+                  "const": "待初始化"
+                }
+              ]
+            },
+            "种族": {
+              "default": "人类",
+              "type": "string"
+            },
+            "年龄": {
+              "default": 20,
+              "type": "number"
+            },
+            "头像": {
+              "default": "👤",
+              "type": "string"
+            },
+            "称号": {
+              "default": "",
+              "type": "string"
+            },
+            "简介标语": {
+              "default": "",
+              "type": "string"
+            }
+          }
+        },
+        "状态": {
+          "type": "object",
+          "properties": {
+            "生命值": {
+              "type": "object",
+              "properties": {
+                "当前": {
+                  "type": "number"
+                },
+                "上限": {
+                  "default": 100,
+                  "type": "number"
+                }
+              }
+            },
+            "精力": {
+              "type": "object",
+              "properties": {
+                "当前": {
+                  "type": "number"
+                },
+                "上限": {
+                  "default": 100,
+                  "type": "number"
+                }
+              }
+            }
+          }
+        },
+        "烹饪等级": {
+          "type": "object",
+          "properties": {
+            "等级": {
+              "type": "number"
+            },
+            "等级称号": {
+              "default": "学徒",
+              "type": "string"
+            },
+            "下一级称号": {
+              "default": "学徒",
+              "type": "string"
+            },
+            "累计做菜次数": {
+              "default": 0,
+              "type": "number"
+            },
+            "升级所需次数": {
+              "default": 10,
+              "type": "number"
+            }
+          }
+        },
+        "当前穿着": {
+          "default": "待初始化",
+          "type": "string"
+        }
+      }
+    },
+    "角色": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "description": "角色内部id"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "显示名": {
+            "default": "",
+            "type": "string"
+          },
+          "种族": {
+            "default": "人类",
+            "type": "string"
+          },
+          "年龄": {
+            "default": 20,
+            "type": "number"
+          },
+          "性别": {
+            "default": "其他",
+            "type": "string",
+            "enum": [
+              "男",
+              "女",
+              "其他"
+            ]
+          },
+          "当前位置": {
+            "default": "",
+            "type": "string"
+          },
+          "头像": {
+            "default": "👤",
+            "type": "string"
+          },
+          "简介标语": {
+            "default": "",
+            "type": "string"
+          },
+          "穿着": {
+            "default": "",
+            "type": "string"
+          },
+          "精力状态": {
+            "default": "状态良好",
+            "type": "string"
+          },
+          "膀胱值": {
+            "type": "object",
+            "properties": {
+              "当前": {
+                "type": "number"
+              },
+              "上限": {
+                "default": 100,
+                "type": "number"
+              }
+            }
+          },
+          "亲密度阶段": {
+            "type": "number"
+          },
+          "亲密度描述": {
+            "default": "",
+            "type": "string"
+          },
+          "好感度": {
+            "type": "object",
+            "properties": {
+              "当前": {
+                "type": "number"
+              },
+              "上限": {
+                "default": 100,
+                "type": "number"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

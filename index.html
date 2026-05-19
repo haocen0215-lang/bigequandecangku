@@ -1,0 +1,1112 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>泥金羊皮卷 UI（重制）</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <button type="button" class="settings-btn" id="settingsBtn" aria-label="打开界面设置" title="界面设置">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path
+          d="M19.14 12.94a7.49 7.49 0 0 0 .05-.94 7.49 7.49 0 0 0-.05-.94l2.03-1.58a.5.5 0 0 0 .12-.64l-1.92-3.32a.5.5 0 0 0-.61-.22l-2.39.96a7 7 0 0 0-1.62-.94l-.36-2.54a.5.5 0 0 0-.5-.42h-3.84a.5.5 0 0 0-.5.42l-.36 2.54a7 7 0 0 0-1.62.94l-2.39-.96a.5.5 0 0 0-.61.22L2.66 8.84a.5.5 0 0 0 .12.64l2.03 1.58a7.49 7.49 0 0 0 0 1.88L2.78 14.52a.5.5 0 0 0-.12.64l1.92 3.32a.5.5 0 0 0 .61.22l2.39-.96a7 7 0 0 0 1.62.94l.36 2.54a.5.5 0 0 0 .5.42h3.84a.5.5 0 0 0 .5-.42l.36-2.54a7 7 0 0 0 1.62-.94l2.39.96a.5.5 0 0 0 .61-.22l1.92-3.32a.5.5 0 0 0-.12-.64zM12 15.5A3.5 3.5 0 1 1 15.5 12 3.5 3.5 0 0 1 12 15.5z"
+        />
+      </svg>
+    </button>
+    <div class="app-wrap">
+      <span class="corner c1"
+        ><svg viewBox="0 0 24 24"><path d="M2 12c6 0 10-4 10-10 0 6 4 10 10 10-6 0-10 4-10 10 0-6-4-10-10-10z" /></svg
+      ></span>
+      <span class="corner c2"
+        ><svg viewBox="0 0 24 24"><path d="M2 12c6 0 10-4 10-10 0 6 4 10 10 10-6 0-10 4-10 10 0-6-4-10-10-10z" /></svg
+      ></span>
+      <span class="corner c3"
+        ><svg viewBox="0 0 24 24"><path d="M2 12c6 0 10-4 10-10 0 6 4 10 10 10-6 0-10 4-10 10 0-6-4-10-10-10z" /></svg
+      ></span>
+      <span class="corner c4"
+        ><svg viewBox="0 0 24 24"><path d="M2 12c6 0 10-4 10-10 0 6 4 10 10 10-6 0-10 4-10 10 0-6-4-10-10-10z" /></svg
+      ></span>
+
+      <div class="app">
+        <aside class="sidebar">
+          <div class="brand">
+            <h1>普利莫迪亚编年录</h1>
+          </div>
+
+          <nav class="menu" id="menu">
+            <button class="nav-btn active" data-page="story">
+              <span class="glyph anim-candle"
+                ><svg viewBox="0 0 24 24">
+                  <path
+                    d="M12 2c2 2.1 1.7 3.8.4 5.4 2.2-.4 3.9 1.5 3.9 3.8 0 2.9-2.1 5.1-4.4 5.1-2.4 0-4.4-2.2-4.4-5.1 0-1.9 1.2-3.5 3-3.8C9.5 5.9 9.9 3.9 12 2zM7.5 16h9v2h-9zm-1.5 3h12v2H6z"
+                  /></svg
+              ></span>
+              <span class="label">剧情</span>
+            </button>
+            <button class="nav-btn" data-page="tavern">
+              <span class="glyph"
+                ><svg viewBox="0 0 24 24">
+                  <path
+                    d="M4 5h16l-1 5.5A4.5 4.5 0 0 1 14.6 14H9.4A4.5 4.5 0 0 1 5 10.5L4 5zm7 9h2v4h3v2H8v-2h3v-4z"
+                  /></svg
+              ></span>
+              <span class="label">酒馆</span>
+            </button>
+            <button class="nav-btn" data-page="inventory">
+              <span class="glyph"
+                ><svg viewBox="0 0 24 24">
+                  <path
+                    d="M3 7l9-4 9 4v10l-9 4-9-4V7zm9-1.9L6 7.8 12 11l6-3.2-6-2.7zm-7 4.3v6.4l6 2.7v-6.4l-6-2.7zm14 0l-6 2.7v6.4l6-2.7V9.4z"
+                  /></svg
+              ></span>
+              <span class="label">库存</span>
+            </button>
+            <button class="nav-btn" data-page="shopping">
+              <span class="glyph"
+                ><svg viewBox="0 0 24 24">
+                  <path
+                    d="M7 7l5-4 5 4h4v2h-1.2l-1.5 11.4A2 2 0 0 1 17.3 22H6.7a2 2 0 0 1-2-1.6L3.2 9H2V7h4zm5-1.6L9.3 7h5.4L12 5.4zM5.3 9l1.4 11h10.6l1.4-11H5.3zm3.7 2h2v6H9v-6zm4 0h2v6h-2v-6z"
+                  /></svg
+              ></span>
+              <span class="label">购物</span>
+            </button>
+            <button class="nav-btn" data-page="ledger">
+              <span class="glyph anim-ledger"
+                ><svg viewBox="0 0 24 24">
+                  <path
+                    d="M5 3h11a2 2 0 0 1 2 2v14H7a2 2 0 0 1-2-2V3zm4 4h7v2H9V7zm0 4h7v2H9v-2zm0 4h4v2H9v-2zM3 7h2v12h11v2H5a2 2 0 0 1-2-2V7z"
+                  /></svg
+              ></span>
+              <span class="label">账本</span>
+            </button>
+            <button class="nav-btn" data-page="profile">
+              <span class="glyph"
+                ><svg viewBox="0 0 24 24">
+                  <path
+                    d="M12 12a4.5 4.5 0 1 0-4.5-4.5A4.5 4.5 0 0 0 12 12zm0 2c-3.8 0-7 1.8-7 4v1.5h14V18c0-2.2-3.2-4-7-4zM3 3h4v2H5v2H3V3zm14 0h4v4h-2V5h-2V3zM3 17h2v2h2v2H3v-4zm16 2h-2v2h4v-4h-2v2z"
+                  /></svg
+              ></span>
+              <span class="label">玩家档案</span>
+            </button>
+            <button class="nav-btn" data-page="roles">
+              <span class="glyph"
+                ><svg viewBox="0 0 24 24">
+                  <path
+                    d="M8 11a3 3 0 1 0-3-3 3 3 0 0 0 3 3zm8 0a3 3 0 1 0-3-3 3 3 0 0 0 3 3zM8 13c-3 0-5.5 1.4-5.5 3.2V19h9v-2.8C11.5 14.4 11 13.8 10 13.4A7.2 7.2 0 0 0 8 13zm8 0a7.2 7.2 0 0 0-2 .4c-1 .4-1.5 1-1.5 2.8V19h9v-2.8C21.5 14.4 19 13 16 13z"
+                  /></svg
+              ></span>
+              <span class="label">角色</span>
+            </button>
+            <button class="nav-btn" data-page="map">
+              <span class="glyph anim-map"
+                ><svg viewBox="0 0 24 24">
+                  <path
+                    d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8zm4.8-12.8-6 2.4-2.4 6 6-2.4 2.4-6z"
+                  /></svg
+              ></span>
+              <span class="label">地图</span>
+            </button>
+            <button class="nav-btn" data-page="farming">
+              <span class="glyph"
+                ><svg viewBox="0 0 24 24">
+                  <path d="M3 4h18v2H3V4zm4 8h2v6H7v-6zm4-4h2v10h-2V8zm4 4h2v6h-2v-6zM4 18h16v2H4v-2z" /></svg></span
+              ><span class="label">农田</span>
+            </button>
+            <button class="nav-btn" data-page="brewing">
+              <span class="glyph"
+                ><svg viewBox="0 0 24 24">
+                  <path d="M7 2h10v2H7V2zm2 4h6v1H9V6zm-1 3h8v1H8V9zm6 3v10l-4-2-4 2V12h8z" /></svg></span
+              ><span class="label">酿酒</span>
+            </button>
+            <button class="nav-btn" data-page="construction">
+              <span class="glyph"
+                ><svg viewBox="0 0 24 24">
+                  <path
+                    d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.49.49 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.48.48 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.07.62-.07.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6A3.6 3.6 0 1 1 15.6 12 3.6 3.6 0 0 1 12 15.6z"
+                  /></svg></span
+              ><span class="label">建造</span>
+            </button>
+            <button class="nav-btn" data-page="employees">
+              <span class="glyph"
+                ><svg viewBox="0 0 24 24">
+                  <path
+                    d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"
+                  /></svg></span
+              ><span class="label">员工</span>
+            </button>
+            <button class="nav-btn" data-page="business">
+              <span class="glyph"
+                ><svg viewBox="0 0 24 24">
+                  <path
+                    d="M21 6h-2V3H5v3H3c-1.1 0-2 .9-2 2v7h2.22c.42 1.36 1.67 2.33 3.14 2.33 1.47 0 2.72-.97 3.14-2.33h4.97c.42 1.36 1.67 2.33 3.14 2.33 1.47 0 2.72-.97 3.14-2.33H23V8c0-1.1-.9-2-2-2zM7 5h10v1H7V5zm2 12c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm6 0c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1z"
+                  /></svg></span
+              ><span class="label">产业</span>
+            </button>
+            <button class="nav-btn" data-page="adventure">
+              <span class="glyph"
+                ><svg viewBox="0 0 24 24">
+                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" /></svg></span
+              ><span class="label">冒险</span>
+            </button>
+            <button class="nav-btn" data-page="relationships">
+              <span class="glyph"
+                ><svg viewBox="0 0 24 24">
+                  <path
+                    d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                  /></svg></span
+              ><span class="label">关系</span>
+            </button>
+          </nav>
+        </aside>
+
+        <section class="main">
+          <div class="pages">
+            <!-- ===== 剧情 ===== -->
+            <article class="page active story-page" id="story">
+              <span class="page-orn po1"
+                ><svg viewBox="0 0 24 24">
+                  <path d="M2 12c6 0 10-4 10-10 0 6 4 10 10 10-6 0-10 4-10 10 0-6-4-10-10-10z" /></svg
+              ></span>
+              <span class="page-orn po2"
+                ><svg viewBox="0 0 24 24">
+                  <path d="M2 12c6 0 10-4 10-10 0 6 4 10 10 10-6 0-10 4-10 10 0-6-4-10-10-10z" /></svg
+              ></span>
+              <span class="page-orn po3"
+                ><svg viewBox="0 0 24 24">
+                  <path d="M2 12c6 0 10-4 10-10 0 6 4 10 10 10-6 0-10 4-10 10 0-6-4-10-10-10z" /></svg
+              ></span>
+              <span class="page-orn po4"
+                ><svg viewBox="0 0 24 24">
+                  <path d="M2 12c6 0 10-4 10-10 0 6 4 10 10 10-6 0-10 4-10 10 0-6-4-10-10-10z" /></svg
+              ></span>
+              <header class="story-hud">
+                <div class="hud-item"><span class="k">日期</span><span class="v">绿涨月15日 周三</span></div>
+                <div class="hud-item"><span class="k">时间</span><span class="v">14:35</span></div>
+                <div class="hud-item"><span class="k">天气</span><span class="v">阵雨</span></div>
+                <div class="hud-item long">
+                  <span class="k">当前位置</span><span class="v">布拉姆维克 · 灶源 · 厨房</span>
+                </div>
+                <div class="hud-item coins">
+                  <span class="k">金钱</span>
+                  <span class="coin myth">秘银币 0</span>
+                  <span class="coin plat">铂金币 2</span>
+                  <span class="coin gold">金币 43</span>
+                  <span class="coin silv">银币 17</span>
+                  <span class="coin copp">铜币 89</span>
+                </div>
+                <div class="hud-item"><span class="k">声望</span><span class="v">★ 略有耳闻</span></div>
+              </header>
+              <div class="story-scroll">
+                <div class="paper-head">
+                  <h2>剧情 <span class="star">✦</span></h2>
+                </div>
+                <div class="paper-body" id="storyPaperBody">
+                  <p class="dropcap">
+                    雨夜的钟声敲过第九下，铁壶酒馆门前停住了一辆没有纹章的马车。你推开窗板，只见车夫递来一封封蜡信，信上烙着北道商会的旧印记。
+                  </p>
+                  <p>
+                    信中写道：若你愿意在今夜接纳一位“无名客”，明晨便可获得冬祭采购清单。它足以让你的小酒馆在三周内跻身城南最繁忙的夜馆之一。
+                  </p>
+                  <p>但与此同时，守夜队也在追查这位无名客。你的选择，可能改变接下来所有势力对你的态度。</p>
+                </div>
+              </div>
+            </article>
+
+            <!-- ===== 酒馆 ===== -->
+            <article class="page" id="tavern">
+              <div class="paper-head">
+                <h2>酒馆 <span class="star">✦</span></h2>
+              </div>
+              <div class="paper-body">
+                <section class="panel">
+                  <h3>酒馆基础设定</h3>
+                  <div class="kv">
+                    <div><span>名称</span><strong>铁壶酒馆</strong></div>
+                    <div><span>所在城市</span><strong>布拉姆维克</strong></div>
+                    <div><span>整体风格</span><strong>北境长屋式，暖炉中心，木梁低顶</strong></div>
+                  </div>
+                </section>
+                <section class="panel" style="margin-top: 12px">
+                  <h3>区域</h3>
+                  <div class="region-unified">
+                    <details class="region-card" open>
+                      <summary class="region-summary">
+                        <div class="region-head">
+                          <h4>主厅</h4>
+                          <span class="state good">整洁</span>
+                        </div>
+                      </summary>
+                      <div class="region-content">
+                        <p class="region-desc">低矮木梁天花板，中央石砌壁炉，长条橡木桌排成两列。</p>
+                        <div class="region-tools">
+                          <span class="tag">壁炉</span><span class="tag">长桌</span><span class="tag">木椅</span
+                          ><span class="tag">烛台</span>
+                        </div>
+                      </div>
+                    </details>
+                    <details class="region-card" open>
+                      <summary class="region-summary">
+                        <div class="region-head">
+                          <h4>厨房</h4>
+                          <span class="state good">正常</span>
+                        </div>
+                      </summary>
+                      <div class="region-content">
+                        <p class="region-desc">靠墙敞口灶台，上方悬挂铁钩和风干香草束，地面略有水汽。</p>
+                        <div class="region-tools">
+                          <span class="tag">灶台</span><span class="tag">铁锅</span><span class="tag">菜刀</span
+                          ><span class="tag">案板</span><span class="tag">蒸笼</span>
+                        </div>
+                      </div>
+                    </details>
+                    <details class="region-card" open>
+                      <summary class="region-summary">
+                        <div class="region-head">
+                          <h4>住宿区</h4>
+                          <span class="state warn">需打扫</span>
+                        </div>
+                      </summary>
+                      <div class="region-content">
+                        <p class="region-desc">二楼木质走廊连接客房与私人生活空间，楼梯口有常亮油灯。</p>
+                        <div class="region-tools">
+                          <span class="tag">走廊油灯</span><span class="tag">公用水盆</span>
+                        </div>
+                        <div class="subspace-wrap">
+                          <div class="subspace-item">
+                            <div class="subspace-top"><strong>1号客房</strong><span class="state idle">空闲</span></div>
+                            <p class="subspace-desc">靠窗小房间，一张单人床和一张矮桌。</p>
+                          </div>
+                          <div class="subspace-item">
+                            <div class="subspace-top"><strong>2号客房</strong><span class="state busy">入住</span></div>
+                            <p class="subspace-desc">双人房，深红粗布窗帘，床脚放着行李箱。</p>
+                          </div>
+                          <div class="subspace-item">
+                            <div class="subspace-top">
+                              <strong>老板卧室</strong><span class="state good">正常</span>
+                            </div>
+                            <p class="subspace-desc">阁楼斜顶小卧室，窗户朝后院，夜里能听见雨声。</p>
+                          </div>
+                          <div class="subspace-item">
+                            <div class="subspace-top"><strong>浴室</strong><span class="state clean">需打扫</span></div>
+                            <p class="subspace-desc">后院旁隔出的木桶浴间，地面仍有潮气。</p>
+                          </div>
+                        </div>
+                      </div>
+                    </details>
+                    <details class="region-card" open>
+                      <summary class="region-summary">
+                        <div class="region-head">
+                          <h4>后院</h4>
+                          <span class="state fix">需维修</span>
+                        </div>
+                      </summary>
+                      <div class="region-content">
+                        <p class="region-desc">碎石地面围着水井和柴堆，夜里常用于清洗器具与临时备料。</p>
+                        <div class="region-tools">
+                          <span class="tag">水井</span><span class="tag">柴堆</span><span class="tag">洗涤槽</span
+                          ><span class="tag">菜园</span><span class="tag">茅房</span>
+                        </div>
+                      </div>
+                    </details>
+                    <details class="region-card" open>
+                      <summary class="region-summary">
+                        <div class="region-head">
+                          <h4>储藏区</h4>
+                          <span class="state good">正常</span>
+                        </div>
+                      </summary>
+                      <div class="region-content">
+                        <p class="region-desc">靠近厨房角落，干料和酒桶分层堆放，通风尚可。</p>
+                        <div class="region-tools">
+                          <span class="tag">木货架</span><span class="tag">发酵缸</span><span class="tag">腌制坛</span>
+                        </div>
+                      </div>
+                    </details>
+                    <details class="region-card" open>
+                      <summary class="region-summary">
+                        <div class="region-head">
+                          <h4>前门门面</h4>
+                          <span class="state good">正常</span>
+                        </div>
+                      </summary>
+                      <div class="region-content">
+                        <p class="region-desc">木牌略旧，门灯在阴雨天更醒目，能吸引过路客短暂停步。</p>
+                        <div class="region-tools"><span class="tag">招牌</span><span class="tag">门灯</span></div>
+                      </div>
+                    </details>
+                    <details class="region-card" open>
+                      <summary class="region-summary">
+                        <div class="region-head">
+                          <h4>柜台酒水</h4>
+                          <span class="state good">正常</span>
+                        </div>
+                      </summary>
+                      <div class="region-content">
+                        <p class="region-desc">吧台靠主厅东侧，收钱、配酒和临时记账都在这里完成。</p>
+                        <div class="region-tools">
+                          <span class="tag">吧台</span><span class="tag">酒杯架</span><span class="tag">零钱盒</span>
+                        </div>
+                      </div>
+                    </details>
+                    <details class="region-card" open>
+                      <summary class="region-summary">
+                        <div class="region-head">
+                          <h4>马厩</h4>
+                          <span class="state fix">施工中</span>
+                        </div>
+                      </summary>
+                      <div class="region-content">
+                        <p class="region-desc">当前仅有临时拴马桩，正式马厩尚未扩建完成。</p>
+                        <div class="region-tools"><span class="tag">临时拴马桩</span></div>
+                      </div>
+                    </details>
+                  </div>
+                </section>
+                <section class="panel" style="margin-top: 12px">
+                  <h3>进行中的制作</h3>
+                  <div class="brew-list">
+                    <div class="brew-item">
+                      <div class="brew-head"><strong>黑麦淡啤</strong><span class="countdown">剩余 1日8时</span></div>
+                      <div class="brew-meta">
+                        <span>容器：发酵缸</span><span>所在区域：储藏区</span><span>状态：发酵中</span
+                        ><span>开始：绿涨月14日 清晨</span><span>预计完成：绿涨月16日 夜晚</span>
+                      </div>
+                    </div>
+                    <div class="brew-item">
+                      <div class="brew-head"><strong>苹果酒基底</strong><span class="countdown">剩余 3日</span></div>
+                      <div class="brew-meta">
+                        <span>容器：橡木桶</span><span>所在区域：地窖</span><span>状态：陈酿中</span
+                        ><span>开始：绿涨月12日 黄昏</span><span>预计完成：绿涨月18日 清晨</span>
+                      </div>
+                    </div>
+                    <div class="brew-item">
+                      <div class="brew-head"><strong>蒜香腌菜</strong><span class="countdown">已完成</span></div>
+                      <div class="brew-meta">
+                        <span>容器：腌制坛</span><span>所在区域：储藏区</span><span>状态：已完成</span
+                        ><span>开始：绿涨月13日 上午</span><span>预计完成：绿涨月15日 上午</span>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+                <section class="panel ff-panel" style="margin-top: 12px">
+                  <h3>经营快进</h3>
+                  <p class="ff-hint">
+                    只填<strong>要跳过的小时数</strong>，生成一段给叙事 AI 的提示：这段时间由 AI
+                    自由描写（忙闲、插曲、炉火杯盏等），不必在此逐项做账。
+                  </p>
+                  <div class="ff-row">
+                    <label
+                      for="ffHours"
+                      style="font-size: calc(12px * var(--text-scale, 1)); color: var(--ink-soft); font-weight: 700"
+                      >跳过</label
+                    >
+                    <input
+                      type="number"
+                      id="ffHours"
+                      class="ff-hours"
+                      min="1"
+                      max="48"
+                      value="3"
+                      step="1"
+                      title="小时数"
+                    />
+                    <span style="font-size: calc(12px * var(--text-scale, 1)); color: var(--ink-soft)">小时</span>
+                    <button type="button" class="ff-skip-btn" id="ffRunBtn">⏩ 生成叙事提示</button>
+                  </div>
+                </section>
+                <section class="panel visitor-panel" style="margin-top: 12px">
+                  <h3>访客骰（村庄版）</h3>
+                  <p class="visitor-hint">
+                    按《酒馆访客生成引擎》规则：投掷 <strong>1d10000</strong>，读为四位
+                    ABCD，解码为标签包；种族与具体人设由叙事 AI 即兴发挥。
+                  </p>
+                  <button type="button" class="visitor-roll-btn" id="visitorRollBtn">🎲 投掷 1d10000</button>
+                </section>
+              </div>
+            </article>
+
+            <!-- ===== 库存 ===== -->
+            <article class="page" id="inventory">
+              <div class="paper-head">
+                <h2>库存 <span class="star">✦</span></h2>
+              </div>
+              <div class="paper-body">
+                <div class="inv-filter" id="invFilter">
+                  <button class="inv-tab active" data-cat="全部">全部</button>
+                  <button class="inv-tab" data-cat="食材">食材</button>
+                  <button class="inv-tab" data-cat="调料">调料</button>
+                  <button class="inv-tab" data-cat="成品">成品</button>
+                  <button class="inv-tab" data-cat="其他">其他</button>
+                </div>
+                <p class="inv-tip">
+                  食材与调料以小格展示（每格为名称与库存）；成品与其他在下方表格。点「加选」每次 +1
+                  份，达库存上限会高亮；旁「−」减 1 份。
+                </p>
+                <div id="invMatBlock" class="inv-mat-block">
+                  <div class="inv-chip-grid" id="invMatGrid">
+                    <div
+                      class="inv-mat-tile inv-item"
+                      data-cat="食材"
+                      data-name="猪五花"
+                      data-qty="5份"
+                      data-selected="0"
+                    >
+                      <div class="inv-mat-tile-top">
+                        <span class="inv-mat-tile-name">猪五花</span><span class="inv-mat-tile-qty">5份</span>
+                      </div>
+                      <div class="inv-name-cell">
+                        <button type="button" class="inv-name-btn" aria-label="选择 猪五花，每次点击加 1 份">
+                          <span class="inv-name-text">加选</span
+                          ><span class="inv-sel-badge" data-sel-badge aria-hidden="true">×0</span></button
+                        ><button type="button" class="inv-name-dec" aria-label="减少 猪五花 1 份" hidden>−</button>
+                      </div>
+                    </div>
+                    <div
+                      class="inv-mat-tile inv-item"
+                      data-cat="食材"
+                      data-name="面粉"
+                      data-qty="12份"
+                      data-selected="0"
+                    >
+                      <div class="inv-mat-tile-top">
+                        <span class="inv-mat-tile-name">面粉</span><span class="inv-mat-tile-qty">12份</span>
+                      </div>
+                      <div class="inv-name-cell">
+                        <button type="button" class="inv-name-btn" aria-label="选择 面粉，每次点击加 1 份">
+                          <span class="inv-name-text">加选</span
+                          ><span class="inv-sel-badge" data-sel-badge aria-hidden="true">×0</span></button
+                        ><button type="button" class="inv-name-dec" aria-label="减少 面粉 1 份" hidden>−</button>
+                      </div>
+                    </div>
+                    <div class="inv-mat-tile inv-item" data-cat="调料" data-name="盐" data-qty="8份" data-selected="0">
+                      <div class="inv-mat-tile-top">
+                        <span class="inv-mat-tile-name">盐</span><span class="inv-mat-tile-qty">8份</span>
+                      </div>
+                      <div class="inv-name-cell">
+                        <button type="button" class="inv-name-btn" aria-label="选择 盐，每次点击加 1 份">
+                          <span class="inv-name-text">加选</span
+                          ><span class="inv-sel-badge" data-sel-badge aria-hidden="true">×0</span></button
+                        ><button type="button" class="inv-name-dec" aria-label="减少 盐 1 份" hidden>−</button>
+                      </div>
+                    </div>
+                    <div
+                      class="inv-mat-tile inv-item"
+                      data-cat="食材"
+                      data-name="深界翠菌"
+                      data-qty="1份"
+                      data-selected="0"
+                    >
+                      <div class="inv-mat-tile-top">
+                        <span class="inv-mat-tile-name">深界翠菌</span><span class="inv-mat-tile-qty">1份</span>
+                      </div>
+                      <div class="inv-name-cell">
+                        <button type="button" class="inv-name-btn" aria-label="选择 深界翠菌，每次点击加 1 份">
+                          <span class="inv-name-text">加选</span
+                          ><span class="inv-sel-badge" data-sel-badge aria-hidden="true">×0</span></button
+                        ><button type="button" class="inv-name-dec" aria-label="减少 深界翠菌 1 份" hidden>−</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div id="invTableWrap">
+                  <table class="inv-table">
+                    <thead>
+                      <tr>
+                        <th>物品名</th>
+                        <th>数量</th>
+                        <th>售价</th>
+                        <th>分类</th>
+                      </tr>
+                    </thead>
+                    <tbody id="invRows">
+                      <tr
+                        class="inv-item"
+                        data-cat="成品"
+                        data-name="红烧肉"
+                        data-qty="2份"
+                        data-selected="0"
+                        data-price-copper="35"
+                        data-flavor-tags="咸甜,脂润,收汁挂壁,酱香,软烂"
+                        data-cook-method="红烧"
+                        data-cook-cat="炖焖煨烧卤类"
+                      >
+                        <td>
+                          <div class="inv-name-cell">
+                            <button type="button" class="inv-name-btn" aria-label="选择 红烧肉，每次点击加 1 份">
+                              <span class="inv-name-text">红烧肉</span
+                              ><span class="inv-sel-badge" data-sel-badge aria-hidden="true">×0</span></button
+                            ><button type="button" class="inv-name-dec" aria-label="减少 红烧肉 1 份" hidden>−</button>
+                          </div>
+                        </td>
+                        <td>2份</td>
+                        <td class="inv-col-price">
+                          <span class="inv-price">35铜<span class="inv-price-unit">/份</span></span>
+                        </td>
+                        <td><span class="inv-badge">成品</span></td>
+                      </tr>
+                      <tr
+                        class="inv-item"
+                        data-cat="成品"
+                        data-name="蒸鱼"
+                        data-qty="3份"
+                        data-selected="0"
+                        data-price-copper="28"
+                        data-flavor-tags="清鲜,湿润,嫩,鲜脂,蒸汽保湿"
+                        data-cook-method="清蒸"
+                        data-cook-cat="蒸类"
+                      >
+                        <td>
+                          <div class="inv-name-cell">
+                            <button type="button" class="inv-name-btn" aria-label="选择 蒸鱼，每次点击加 1 份">
+                              <span class="inv-name-text">蒸鱼</span
+                              ><span class="inv-sel-badge" data-sel-badge aria-hidden="true">×0</span></button
+                            ><button type="button" class="inv-name-dec" aria-label="减少 蒸鱼 1 份" hidden>−</button>
+                          </div>
+                        </td>
+                        <td>3份</td>
+                        <td class="inv-col-price">
+                          <span class="inv-price">28铜<span class="inv-price-unit">/份</span></span>
+                        </td>
+                        <td><span class="inv-badge">成品</span></td>
+                      </tr>
+                      <tr
+                        class="inv-item"
+                        data-cat="成品"
+                        data-name="黑麦淡啤"
+                        data-qty="6份"
+                        data-selected="0"
+                        data-price-copper="8"
+                        data-flavor-tags="麦香,苦甘,酒香,清爽,微泡"
+                        data-cook-method="酒精发酵"
+                        data-cook-cat="腌渍泡发酵类"
+                      >
+                        <td>
+                          <div class="inv-name-cell">
+                            <button type="button" class="inv-name-btn" aria-label="选择 黑麦淡啤，每次点击加 1 份">
+                              <span class="inv-name-text">黑麦淡啤</span
+                              ><span class="inv-sel-badge" data-sel-badge aria-hidden="true">×0</span></button
+                            ><button type="button" class="inv-name-dec" aria-label="减少 黑麦淡啤 1 份" hidden>
+                              −
+                            </button>
+                          </div>
+                        </td>
+                        <td>6份</td>
+                        <td class="inv-col-price">
+                          <span class="inv-price">8铜<span class="inv-price-unit">/份</span></span>
+                        </td>
+                        <td><span class="inv-badge">成品</span></td>
+                      </tr>
+                      <tr class="inv-item" data-cat="其他" data-name="干木柴" data-qty="20束" data-selected="0">
+                        <td>
+                          <div class="inv-name-cell">
+                            <button type="button" class="inv-name-btn" aria-label="选择 干木柴，每次点击加 1 束">
+                              <span class="inv-name-text">干木柴</span
+                              ><span class="inv-sel-badge" data-sel-badge aria-hidden="true">×0</span></button
+                            ><button type="button" class="inv-name-dec" aria-label="减少 干木柴 1 束" hidden>−</button>
+                          </div>
+                        </td>
+                        <td>20束</td>
+                        <td class="inv-col-price"><span class="inv-price-empty">—</span></td>
+                        <td><span class="inv-badge">其他</span></td>
+                      </tr>
+                      <tr class="inv-item" data-cat="其他" data-name="小瓶治疗药水" data-qty="2瓶" data-selected="0">
+                        <td>
+                          <div class="inv-name-cell">
+                            <button type="button" class="inv-name-btn" aria-label="选择 小瓶治疗药水，每次点击加 1 瓶">
+                              <span class="inv-name-text">小瓶治疗药水</span
+                              ><span class="inv-sel-badge" data-sel-badge aria-hidden="true">×0</span></button
+                            ><button type="button" class="inv-name-dec" aria-label="减少 小瓶治疗药水 1 瓶" hidden>
+                              −
+                            </button>
+                          </div>
+                        </td>
+                        <td>2瓶</td>
+                        <td class="inv-col-price"><span class="inv-price-empty">—</span></td>
+                        <td><span class="inv-badge">其他</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="inv-actions">
+                  <div class="inv-act-split" id="cookSplit">
+                    <button type="button" class="inv-act-split-main" data-action="cook" title="不指定手法，直接做菜">
+                      <span class="inv-act-emoji" aria-hidden="true">🥘</span>做菜
+                    </button>
+                    <button
+                      type="button"
+                      class="inv-act-split-toggle"
+                      id="cookToggleBtn"
+                      aria-expanded="false"
+                      aria-controls="cookPanel"
+                      title="展开烹饪手法面板"
+                    >
+                      <span class="inv-act-arrow" aria-hidden="true">▸</span
+                      ><span class="inv-act-split-label">选手法</span>
+                    </button>
+                  </div>
+                  <button type="button" class="inv-act-btn" data-action="sauce">
+                    <span class="inv-act-emoji" aria-hidden="true">🫙</span>做酱
+                  </button>
+                  <button type="button" class="inv-act-btn" data-action="drink">
+                    <span class="inv-act-emoji" aria-hidden="true">🍷</span>做喝的
+                  </button>
+                  <button type="button" class="inv-act-btn inv-act-btn--serve" data-action="serve">
+                    <span class="inv-act-emoji" aria-hidden="true">🍽️</span>上菜结账
+                  </button>
+                  <button type="button" class="inv-clear" id="invClearSel">清空选择</button>
+                </div>
+                <section class="cook-panel" id="cookPanel" aria-label="烹饪手法选择器" hidden>
+                  <header class="cook-panel-head">
+                    <span class="cook-panel-title">✦ 烹饪手法</span>
+                    <span class="cook-player-badge" id="cookPlayerBadge" title="由「玩家档案 → 烹饪等级」决定"
+                      >LV.5 持勺匠</span
+                    >
+                    <div class="cook-search-wrap" id="cookSearchWrap">
+                      <span class="cook-search-icon" aria-hidden="true">🔍</span>
+                      <input
+                        type="search"
+                        id="cookSearch"
+                        class="cook-search"
+                        placeholder="搜手法（如「红」「蒸」「低温」「发酵」）…"
+                        autocomplete="off"
+                      />
+                      <button type="button" class="cook-search-clear" id="cookSearchClear" aria-label="清空搜索">
+                        ×
+                      </button>
+                    </div>
+                    <button
+                      type="button"
+                      class="cook-panel-toggle"
+                      id="cookPanelToggle"
+                      aria-label="关闭面板"
+                      title="关闭"
+                    >
+                      ×
+                    </button>
+                  </header>
+                  <div class="cook-panel-body" id="cookPanelBody">
+                    <div class="cook-recent" id="cookRecentRow" hidden>
+                      <span class="cook-section-label">最近用过</span>
+                      <div class="cook-method-row" id="cookRecentMethods"></div>
+                      <button type="button" class="cook-recent-clear" id="cookRecentClear">清空</button>
+                    </div>
+                    <div class="cook-summary-bar">
+                      <span id="cookSummaryText">已解锁 0 / 0 种手法</span>
+                      <span class="cook-bar-actions"
+                        ><button type="button" class="cook-bar-btn" id="cookExpandAll">全部展开</button
+                        ><button type="button" class="cook-bar-btn" id="cookCollapseAll">全部折叠</button></span
+                      >
+                    </div>
+                    <div class="cook-levels" id="cookLevels"></div>
+                  </div>
+                </section>
+              </div>
+            </article>
+
+            <!-- ===== 购物 ===== -->
+            <article class="page" id="shopping">
+              <div class="paper-head">
+                <h2>购物 <span class="star">✦</span></h2>
+              </div>
+              <div class="paper-body">
+                <p class="shop-tagline">铜板与铂币的流转，从一只篮子开始 — 切换店铺、点商品入篮、自动结算。</p>
+                <div class="shop-tabs" id="shopTabs" role="tablist"></div>
+                <div class="shop-banner" id="shopBanner">
+                  <div class="shop-banner-meta">
+                    <div class="shop-banner-name" id="shopBannerName">蔬菜摊</div>
+                    <div class="shop-banner-loc" id="shopBannerLoc">📍 安培瑟尔王城 · 集市</div>
+                  </div>
+                </div>
+                <div class="shop-grid">
+                  <section class="shop-products-wrap">
+                    <h3 class="shop-h3">货品 <span class="shop-h3-sub" id="shopProductCount">0 种</span></h3>
+                    <div class="shop-products" id="shopProducts"></div>
+                  </section>
+                  <aside class="shop-cart-wrap">
+                    <h3 class="shop-h3">购物篮 <span class="shop-h3-sub" id="shopCartCount">0 件</span></h3>
+                    <div class="shop-cart" id="shopCart">
+                      <p class="shop-cart-empty">点商品名加入篮子，可在不同店铺之间累积。</p>
+                    </div>
+                    <div class="shop-cart-foot">
+                      <div class="shop-total">
+                        <span class="shop-total-k">合计</span><span class="shop-total-v" id="shopCartTotal">0铜</span>
+                      </div>
+                      <div class="shop-cart-actions">
+                        <button type="button" class="inv-act-btn shop-pay-btn" id="shopGenerate">
+                          <span class="inv-act-emoji" aria-hidden="true">🧾</span>结账并入库
+                        </button>
+                        <button type="button" class="inv-clear" id="shopClearCart">清空购物篮</button>
+                      </div>
+                    </div>
+                  </aside>
+                </div>
+              </div>
+            </article>
+
+            <!-- ===== 账本 ===== -->
+            <article class="page" id="ledger">
+              <div class="paper-head">
+                <h2>账本 <span class="star">✦</span></h2>
+              </div>
+              <div class="paper-body">
+                <p class="ledger-tagline">铁壶酒馆 · 自绿涨月初一开张以来的累计回响。</p>
+                <h3 class="ledger-h3">经营足迹</h3>
+                <div class="stat-grid">
+                  <div class="stat-card">
+                    <div class="stat-icon" aria-hidden="true">📅</div>
+                    <div class="stat-meta">
+                      <div class="stat-k">累计营业天数</div>
+                      <div class="stat-v">47<span class="stat-unit"> 天</span></div>
+                    </div>
+                  </div>
+                  <div class="stat-card">
+                    <div class="stat-icon" aria-hidden="true">👥</div>
+                    <div class="stat-meta">
+                      <div class="stat-k">累计接待客人数</div>
+                      <div class="stat-v">847<span class="stat-unit"> 位</span></div>
+                    </div>
+                  </div>
+                  <div class="stat-card">
+                    <div class="stat-icon" aria-hidden="true">🛏️</div>
+                    <div class="stat-meta">
+                      <div class="stat-k">累计客房入住</div>
+                      <div class="stat-v">92<span class="stat-unit"> 间夜</span></div>
+                    </div>
+                  </div>
+                </div>
+                <h3 class="ledger-h3">金银流转</h3>
+                <div class="stat-grid">
+                  <div class="stat-card stat-income">
+                    <div class="stat-icon" aria-hidden="true">📈</div>
+                    <div class="stat-meta">
+                      <div class="stat-k">累计总收入</div>
+                      <div class="stat-v" data-copper="8470">—</div>
+                      <div class="stat-sub" data-copper-raw="8470">—</div>
+                    </div>
+                  </div>
+                </div>
+                <h3 class="ledger-h3">当前总资产</h3>
+                <div class="asset-card">
+                  <div class="asset-coins">
+                    <span class="coin myth" data-coin-count="0" data-coin-tier="myth">秘银币 0</span>
+                    <span class="coin plat" data-coin-count="2" data-coin-tier="plat">铂金币 2</span>
+                    <span class="coin gold" data-coin-count="43" data-coin-tier="gold">金币 43</span>
+                    <span class="coin silv" data-coin-count="17" data-coin-tier="silv">银币 17</span>
+                    <span class="coin copp" data-coin-count="89" data-coin-tier="copp">铜币 89</span>
+                  </div>
+                  <div class="asset-total">
+                    <span class="asset-total-k">折算合计</span
+                    ><span class="asset-total-v" data-copper-from-coins>—</span>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- ===== 玩家档案 ===== -->
+            <article class="page" id="profile">
+              <div class="paper-head">
+                <h2>玩家档案 <span class="star">✦</span></h2>
+              </div>
+              <div class="paper-body">
+                <section class="profile-hero">
+                  <div class="profile-avatar-wrap">
+                    <button type="button" class="profile-avatar" id="profileAvatarBtn" aria-label="点击上传头像">
+                      <span class="profile-avatar-glyph" aria-hidden="true">👩‍🍳</span>
+                      <span class="profile-avatar-overlay" aria-hidden="true"
+                        ><span class="profile-avatar-overlay-icon">📷</span
+                        ><span class="profile-avatar-overlay-text">点击更换</span></span
+                      >
+                    </button>
+                    <button
+                      type="button"
+                      class="profile-avatar-reset"
+                      id="profileAvatarReset"
+                      aria-label="移除自定义头像，恢复默认"
+                      title="移除自定义头像"
+                      hidden
+                    >
+                      ×
+                    </button>
+                    <input type="file" accept="image/*" id="profileAvatarInput" hidden />
+                  </div>
+                  <div class="profile-id">
+                    <h3 class="profile-name">艾莉娅·铁壶</h3>
+                    <div class="profile-meta">
+                      <span class="profile-meta-pill">人类</span><span class="profile-meta-pill">27 岁</span
+                      ><span class="profile-meta-pill profile-title">★ 略有耳闻</span>
+                    </div>
+                    <p class="profile-tagline">布拉姆维克城南，铁壶酒馆的当家。</p>
+                  </div>
+                </section>
+                <h3 class="profile-h3">基本信息</h3>
+                <div class="info-grid">
+                  <div class="info-cell"><span class="info-k">姓名</span><span class="info-v">艾莉娅·铁壶</span></div>
+                  <div class="info-cell"><span class="info-k">种族</span><span class="info-v">人类</span></div>
+                  <div class="info-cell"><span class="info-k">年龄</span><span class="info-v">27 岁</span></div>
+                </div>
+                <h3 class="profile-h3">状态</h3>
+                <div class="profile-stats-grid">
+                  <div class="status-card status-hp" data-bar-now="78" data-bar-max="100">
+                    <div class="status-row">
+                      <span class="status-icon" aria-hidden="true">❤️</span><span class="status-name">生命值 HP</span
+                      ><span class="status-num"
+                        ><span class="status-now">78</span> / <span class="status-max">100</span></span
+                      >
+                    </div>
+                    <div class="status-bar"><i></i></div>
+                  </div>
+                  <div class="status-card status-stamina" data-bar-now="65" data-bar-max="100">
+                    <div class="status-row">
+                      <span class="status-icon" aria-hidden="true">⚡</span><span class="status-name">精力</span
+                      ><span class="status-num"
+                        ><span class="status-now">65</span> / <span class="status-max">100</span></span
+                      >
+                    </div>
+                    <div class="status-bar"><i></i></div>
+                  </div>
+                </div>
+                <p class="profile-bar-hint">
+                  生命值与精力的<strong>上限</strong>可通过规律锻炼（如有氧耐力、负重力量、格斗对练等）逐步提升；当前数值仍会随受伤、休息与消耗而增减。
+                </p>
+                <h3 class="profile-h3">烹饪等级</h3>
+                <div
+                  class="cook-card"
+                  data-cook-level="5"
+                  data-cook-rank="持勺匠"
+                  data-cook-next-rank="灶台师傅"
+                  data-cook-cur="87"
+                  data-cook-next="120"
+                >
+                  <div class="cook-row">
+                    <div class="cook-icon" aria-hidden="true">🍳</div>
+                    <div class="cook-meta">
+                      <div class="cook-title">
+                        <span class="cook-lv">LV.<span data-cook-lv-display>5</span></span
+                        ><span class="cook-rank-name" data-cook-rank-display>持勺匠</span>
+                      </div>
+                      <div class="cook-sub">
+                        累计做菜 <strong data-cook-cur-display>87</strong> 次 · 距 LV.<span data-cook-next-lv-display
+                          >6</span
+                        >「<span data-cook-next-rank-display>灶台师傅</span>」还需
+                        <strong data-cook-rem-display>33</strong> 次
+                      </div>
+                    </div>
+                  </div>
+                  <div class="status-bar cook-bar"><i></i></div>
+                </div>
+                <h3 class="profile-h3">当前穿着</h3>
+                <div class="role-section-card">
+                  <p class="role-outfit-line">上身靛染麻布对襟衫，下着耐磨深灰长裤，内里白棉布内裤。</p>
+                </div>
+              </div>
+            </article>
+
+            <!-- ===== 角色 ===== -->
+            <article class="page" id="roles">
+              <div class="paper-head">
+                <h2>角色 <span class="star">✦</span></h2>
+              </div>
+              <div class="paper-body">
+                <section class="roles-list-view" id="rolesListView">
+                  <p class="role-list-tagline">铁壶酒馆周遭的人物速写。点击任一卡片查看其档案。</p>
+                  <div class="role-card-grid" id="roleCardGrid"></div>
+                </section>
+                <section class="roles-detail-view" id="rolesDetailView" hidden>
+                  <input type="file" accept="image/*" id="roleAvatarFileInput" hidden aria-hidden="true" />
+                  <button type="button" class="role-back-btn" id="roleBackBtn">← 返回列表</button>
+                  <div id="roleDetailContent"></div>
+                </section>
+              </div>
+            </article>
+
+            <!-- ===== 地图 ===== -->
+            <article class="page" id="map">
+              <div class="paper-head">
+                <h2>地图 <span class="star">✦</span></h2>
+              </div>
+              <div class="paper-body">
+                <p class="map-tagline">
+                  大陆世界地图：各种族定居点与交通路线。拖拽平移，滚轮缩放，双击复位。点击节点查看详情。
+                </p>
+                <div class="map-toolbar">
+                  <button type="button" class="map-tool-btn" id="mapBackToPlayer" title="回到玩家位置">
+                    📍 回到玩家
+                  </button>
+                  <span class="map-legend" aria-hidden="true">
+                    <span class="map-legend-item"><span class="legend-line t-road"></span>官道</span>
+                    <span class="map-legend-item"><span class="legend-line t-trail"></span>乡道</span>
+                    <span class="map-legend-item"><span class="legend-line t-water"></span>水路</span>
+                    <span class="map-legend-item"><span class="legend-line t-mountain"></span>山路</span>
+                    <span class="map-legend-item"><span class="legend-line t-forest"></span>林径</span>
+                    <span class="map-legend-item"><span class="legend-line t-sea"></span>海路</span>
+                  </span>
+                </div>
+                <div class="map-canvas-wrap">
+                  <svg
+                    id="worldMap"
+                    class="world-map"
+                    viewBox="-7000 -9750 16250 19250"
+                    role="img"
+                    aria-label="卡瑞西亚大陆地图"
+                  >
+                    <defs>
+                      <pattern id="mapDots" x="0" y="0" width="200" height="200" patternUnits="userSpaceOnUse">
+                        <circle cx="10" cy="10" r="10" fill="rgba(111,74,33,.06)" />
+                      </pattern>
+                      <radialGradient id="playerPulse" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="rgba(242,218,158,.85)" />
+                        <stop offset="70%" stop-color="rgba(201,163,74,.18)" />
+                        <stop offset="100%" stop-color="rgba(201,163,74,0)" />
+                      </radialGradient>
+                    </defs>
+                    <rect x="-8750" y="-12500" width="20000" height="27500" fill="url(#mapDots)" />
+                    <g id="mapGrid" class="map-grid"></g>
+                    <g id="mapEdges" class="map-edges"></g>
+                    <g id="mapNodes" class="map-nodes"></g>
+                    <g class="compass" transform="translate(8750 9000)" aria-hidden="true">
+                      <circle r="200" fill="rgba(255,255,255,.18)" stroke="rgba(111,74,33,.5)" stroke-width="10" />
+                      <path d="M0 -162 L30 0 L0 162 L-30 0 Z" fill="#9a742f" />
+                      <path d="M-162 0 L0 30 L162 0 L0 -30 Z" fill="rgba(111,74,33,.55)" />
+                      <text y="-212" text-anchor="middle" font-size="100" fill="#5a3b1c" font-weight="700">N</text>
+                    </g>
+                  </svg>
+                </div>
+                <div class="map-detail" id="mapDetail" aria-live="polite"></div>
+                <div class="map-export">
+                  <div class="map-export-head">
+                    <p class="map-export-hint">
+                      将当前选中地点的 &lt;map_info&gt; 摘要写入<strong>底部统一输出区</strong>并复制到剪贴板。
+                    </p>
+                    <button type="button" class="inv-act-btn" id="mapCopyBtn">📋 生成 map_info 并复制</button>
+                  </div>
+                </div>
+              </div>
+              <!-- ===== 农田 ===== -->
+              <article class="page" id="farming">
+                <div class="paper-head">
+                  <h2>农田 <span class="star">✦</span></h2>
+                </div>
+                <div class="paper-body">
+                  <div class="panel">
+                    <h3>作物状态</h3>
+                    <div id="farmList" style="display: grid; gap: 6px; margin-top: 6px"></div>
+                  </div>
+                  <div class="panel" style="margin-top: 12px">
+                    <h3>种新作物</h3>
+                    <button type="button" class="inv-act-btn" id="farmPlantBtn" style="margin-top: 6px">
+                      🌱 跟 AI 说要种什么
+                    </button>
+                  </div>
+                </div>
+              </article>
+
+              <!-- ===== 酿酒 ===== -->
+              <article class="page" id="brewing">
+                <div class="paper-head">
+                  <h2>酿酒 <span class="star">✦</span></h2>
+                </div>
+                <div class="paper-body">
+                  <div class="panel">
+                    <h3>酿造中</h3>
+                    <div id="brewList" style="display: grid; gap: 6px; margin-top: 6px"></div>
+                  </div>
+                  <div class="panel" style="margin-top: 12px">
+                    <h3>封新桶</h3>
+                    <button type="button" class="inv-act-btn" id="brewStartBtn" style="margin-top: 6px">
+                      🍺 跟 AI 说要酿什么
+                    </button>
+                  </div>
+                </div>
+              </article>
+
+              <!-- ===== 建造 ===== -->
+              <article class="page" id="construction">
+                <div class="paper-head">
+                  <h2>建造 <span class="star">✦</span></h2>
+                </div>
+                <div class="paper-body">
+                  <div class="panel">
+                    <h3>区域列表</h3>
+                    <div id="constructionRegions" style="display: grid; gap: 6px; margin-top: 6px"></div>
+                  </div>
+                  <div class="panel" style="margin-top: 12px">
+                    <h3>扩建/升级</h3>
+                    <button type="button" class="inv-act-btn" id="buildAddBtn" style="margin-top: 6px">
+                      🔨 告诉 AI 想建什么
+                    </button>
+                  </div>
+                </div>
+              </article>
+
+              <!-- ===== 员工 ===== -->
+              <article class="page" id="employees">
+                <div class="paper-head">
+                  <h2>员工 <span class="star">✦</span></h2>
+                </div>
+                <div class="paper-body">
+                  <div class="panel">
+                    <h3>当前员工</h3>
+                    <div id="employeeList" style="display: grid; gap: 6px; margin-top: 6px"></div>
+                  </div>
+                </div>
+              </article>
+
+              <!-- ===== 产业 ===== -->
+              <article class="page" id="business">
+                <div class="paper-head">
+                  <h2>产业 <span class="star">✦</span></h2>
+                </div>
+                <div class="paper-body">
+                  <div id="businessList" style="display: grid; gap: 6px"></div>
+                </div>
+              </article>
+
+              <!-- ===== 冒险 ===== -->
+              <article class="page" id="adventure">
+                <div class="paper-head">
+                  <h2>冒险 <span class="star">✦</span></h2>
+                </div>
+                <div class="paper-body">
+                  <div class="panel">
+                    <h3>出发</h3>
+                    <button type="button" class="inv-act-btn" id="adventureGoBtn" style="margin-top: 6px">
+                      ⚔️ 跟 AI 说想去哪冒险
+                    </button>
+                  </div>
+                </div>
+              </article>
+
+              <!-- ===== 关系 ===== -->
+              <article class="page" id="relationships">
+                <div class="paper-head">
+                  <h2>关系 <span class="star">✦</span></h2>
+                </div>
+                <div class="paper-body">
+                  <div id="relationList" style="display: grid; gap: 8px"></div>
+                </div>
+              </article>
+            </article>
+          </div>
+
+          <footer class="output-dock" id="outputDock" aria-label="统一输出区">
+            <div class="output-dock-head">
+              <label class="output-dock-title" id="globalOutputLabel" for="globalOutput">输出区</label>
+              <button type="button" class="output-dock-copy" id="globalOutputCopy" title="复制本区全部文字">
+                📋 复制
+              </button>
+            </div>
+            <textarea
+              id="globalOutput"
+              class="global-output-text"
+              spellcheck="false"
+              placeholder="在库存、购物、地图、酒馆「经营快进」等生成内容后会显示在此处；也可在此直接输入或粘贴。"
+            ></textarea>
+          </footer>
+        </section>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

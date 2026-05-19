@@ -1,0 +1,714 @@
+<head>
+  <link rel="stylesheet" href="./style.css" />
+  <!-- 兜底：浏览器直接打开时加载 webpack external 依赖；酒馆 iframe 中由父窗口提供 -->
+  <script>
+    if (typeof window.z === 'undefined') {
+      document.write(
+        '<scr' +
+          'ipt src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"><\/scr' +
+          'ipt><scr' +
+          'ipt src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"><\/scr' +
+          'ipt><scr' +
+          'ipt src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.js"><\/scr' +
+          'ipt><scr' +
+          'ipt src="https://cdn.jsdelivr.net/npm/yaml@2.7.1/dist/umd/index.js"><\/scr' +
+          'ipt>',
+      );
+    }
+  </script>
+  <script type="module">
+    if (typeof window.z === 'undefined') {
+      import('https://cdn.jsdelivr.net/npm/zod@4.4.3/+esm').then(m => {
+        window.z = m.default || m.z || m;
+      });
+    }
+  </script>
+</head>
+<body>
+  <div id="app">
+    <div class="app-wrap">
+      <span class="corner c1"
+        ><svg viewBox="0 0 24 24"><path d="M2 12c6 0 10-4 10-10 0 6 4 10 10 10-6 0-10 4-10 10 0-6-4-10-10-10z" /></svg
+      ></span>
+      <span class="corner c2"
+        ><svg viewBox="0 0 24 24"><path d="M2 12c6 0 10-4 10-10 0 6 4 10 10 10-6 0-10 4-10 10 0-6-4-10-10-10z" /></svg
+      ></span>
+      <span class="corner c3"
+        ><svg viewBox="0 0 24 24"><path d="M2 12c6 0 10-4 10-10 0 6 4 10 10 10-6 0-10 4-10 10 0-6-4-10-10-10z" /></svg
+      ></span>
+      <span class="corner c4"
+        ><svg viewBox="0 0 24 24"><path d="M2 12c6 0 10-4 10-10 0 6 4 10 10 10-6 0-10 4-10 10 0-6-4-10-10-10z" /></svg
+      ></span>
+      <div class="app">
+        <aside class="sidebar">
+          <div class="brand"><h1>普利莫迪亚编年录</h1></div>
+          <nav class="menu" id="menu">
+            <button class="nav-btn active" data-page="story">
+              <span class="glyph anim-candle"
+                ><svg viewBox="0 0 24 24">
+                  <path
+                    d="M12 2c2 2.1 1.7 3.8.4 5.4 2.2-.4 3.9 1.5 3.9 3.8 0 2.9-2.1 5.1-4.4 5.1-2.4 0-4.4-2.2-4.4-5.1 0-1.9 1.2-3.5 3-3.8C9.5 5.9 9.9 3.9 12 2zM7.5 16h9v2h-9zm-1.5 3h12v2H6z"
+                  /></svg></span
+              ><span class="label">剧情</span>
+            </button>
+            <button class="nav-btn" data-page="tavern">
+              <span class="glyph"
+                ><svg viewBox="0 0 24 24">
+                  <path
+                    d="M4 5h16l-1 5.5A4.5 4.5 0 0 1 14.6 14H9.4A4.5 4.5 0 0 1 5 10.5L4 5zm7 9h2v4h3v2H8v-2h3v-4z"
+                  /></svg></span
+              ><span class="label">酒馆</span>
+            </button>
+            <button class="nav-btn" data-page="inventory">
+              <span class="glyph"
+                ><svg viewBox="0 0 24 24">
+                  <path
+                    d="M3 7l9-4 9 4v10l-9 4-9-4V7zm9-1.9L6 7.8 12 11l6-3.2-6-2.7zm-7 4.3v6.4l6 2.7v-6.4l-6-2.7zm14 0l-6 2.7v6.4l6-2.7V9.4z"
+                  /></svg></span
+              ><span class="label">库存</span>
+            </button>
+            <button class="nav-btn" data-page="shopping">
+              <span class="glyph"
+                ><svg viewBox="0 0 24 24">
+                  <path
+                    d="M7 7l5-4 5 4h4v2h-1.2l-1.5 11.4A2 2 0 0 1 17.3 22H6.7a2 2 0 0 1-2-1.6L3.2 9H2V7h4zm5-1.6L9.3 7h5.4L12 5.4zM5.3 9l1.4 11h10.6l1.4-11H5.3zm3.7 2h2v6H9v-6zm4 0h2v6h-2v-6z"
+                  /></svg></span
+              ><span class="label">购物</span>
+            </button>
+            <button class="nav-btn" data-page="ledger">
+              <span class="glyph anim-ledger"
+                ><svg viewBox="0 0 24 24">
+                  <path
+                    d="M5 3h11a2 2 0 0 1 2 2v14H7a2 2 0 0 1-2-2V3zm4 4h7v2H9V7zm0 4h7v2H9v-2zm0 4h4v2H9v-2zM3 7h2v12h11v2H5a2 2 0 0 1-2-2V7z"
+                  /></svg></span
+              ><span class="label">账本</span>
+            </button>
+            <button class="nav-btn" data-page="profile">
+              <span class="glyph"
+                ><svg viewBox="0 0 24 24">
+                  <path
+                    d="M12 12a4.5 4.5 0 1 0-4.5-4.5A4.5 4.5 0 0 0 12 12zm0 2c-3.8 0-7 1.8-7 4v1.5h14V18c0-2.2-3.2-4-7-4z"
+                  /></svg></span
+              ><span class="label">玩家档案</span>
+            </button>
+            <button class="nav-btn" data-page="roles">
+              <span class="glyph"
+                ><svg viewBox="0 0 24 24">
+                  <path
+                    d="M8 11a3 3 0 1 0-3-3 3 3 0 0 0 3 3zm8 0a3 3 0 1 0-3-3 3 3 0 0 0 3 3zM8 13c-3 0-5.5 1.4-5.5 3.2V19h9v-2.8C11.5 14.4 11 13.8 10 13.4A7.2 7.2 0 0 0 8 13zm8 0c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5z"
+                  /></svg></span
+              ><span class="label">角色</span>
+            </button>
+            <button class="nav-btn" data-page="map">
+              <span class="glyph anim-map"
+                ><svg viewBox="0 0 24 24">
+                  <path
+                    d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8zm4.8-12.8-6 2.4-2.4 6 6-2.4 2.4-6z"
+                  /></svg></span
+              ><span class="label">地图</span>
+            </button>
+            <button class="nav-btn" data-page="farming">
+              <span class="glyph"
+                ><svg viewBox="0 0 24 24">
+                  <path d="M3 4h18v2H3V4zm4 8h2v6H7v-6zm4-4h2v10h-2V8zm4 4h2v6h-2v-6zM4 18h16v2H4v-2z" /></svg></span
+              ><span class="label">农田</span>
+            </button>
+            <button class="nav-btn" data-page="brewing">
+              <span class="glyph"
+                ><svg viewBox="0 0 24 24">
+                  <path d="M7 2h10v2H7V2zm2 4h6v1H9V6zm-1 3h8v1H8V9zm6 3v10l-4-2-4 2V12h8z" /></svg></span
+              ><span class="label">酿酒</span>
+            </button>
+            <button class="nav-btn" data-page="construction">
+              <span class="glyph"
+                ><svg viewBox="0 0 24 24">
+                  <path
+                    d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.49.49 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.48.48 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.07.62-.07.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6A3.6 3.6 0 1 1 15.6 12 3.6 3.6 0 0 1 12 15.6z"
+                  /></svg></span
+              ><span class="label">建造</span>
+            </button>
+            <button class="nav-btn" data-page="employees">
+              <span class="glyph"
+                ><svg viewBox="0 0 24 24">
+                  <path
+                    d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"
+                  /></svg></span
+              ><span class="label">员工</span>
+            </button>
+            <button class="nav-btn" data-page="business">
+              <span class="glyph"
+                ><svg viewBox="0 0 24 24">
+                  <path
+                    d="M21 6h-2V3H5v3H3c-1.1 0-2 .9-2 2v7h2.22c.42 1.36 1.67 2.33 3.14 2.33 1.47 0 2.72-.97 3.14-2.33h4.97c.42 1.36 1.67 2.33 3.14 2.33 1.47 0 2.72-.97 3.14-2.33H23V8c0-1.1-.9-2-2-2zM7 5h10v1H7V5zm2 12c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm6 0c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1z"
+                  /></svg></span
+              ><span class="label">产业</span>
+            </button>
+            <button class="nav-btn" data-page="adventure">
+              <span class="glyph"
+                ><svg viewBox="0 0 24 24">
+                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" /></svg></span
+              ><span class="label">冒险</span>
+            </button>
+            <button class="nav-btn" data-page="relationships">
+              <span class="glyph"
+                ><svg viewBox="0 0 24 24">
+                  <path
+                    d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                  /></svg></span
+              ><span class="label">关系</span>
+            </button>
+            <button class="nav-btn" data-page="debug">
+              <span class="glyph"
+                ><svg viewBox="0 0 24 24">
+                  <path
+                    d="M12 2a3 3 0 0 1 3 3v1h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h3V5a3 3 0 0 1 3-3zm0 2a1 1 0 0 0-1 1v1h2V5a1 1 0 0 0-1-1zM8 10v2h2v-2H8zm4 0v2h2v-2h-2zm4 0v2h2v-2h-2z"
+                  /></svg></span
+              ><span class="label">调试</span>
+            </button>
+          </nav>
+        </aside>
+        <section class="main">
+          <div class="pages" id="pagesContainer">
+            <article class="page active story-page" id="story">
+              <span class="page-orn po1"
+                ><svg viewBox="0 0 24 24">
+                  <path d="M2 12c6 0 10-4 10-10 0 6 4 10 10 10-6 0-10 4-10 10 0-6-4-10-10-10z" /></svg
+              ></span>
+              <span class="page-orn po2"
+                ><svg viewBox="0 0 24 24">
+                  <path d="M2 12c6 0 10-4 10-10 0 6 4 10 10 10-6 0-10 4-10 10 0-6-4-10-10-10z" /></svg
+              ></span>
+              <span class="page-orn po3"
+                ><svg viewBox="0 0 24 24">
+                  <path d="M2 12c6 0 10-4 10-10 0 6 4 10 10 10-6 0-10 4-10 10 0-6-4-10-10-10z" /></svg
+              ></span>
+              <span class="page-orn po4"
+                ><svg viewBox="0 0 24 24">
+                  <path d="M2 12c6 0 10-4 10-10 0 6 4 10 10 10-6 0-10 4-10 10 0-6-4-10-10-10z" /></svg
+              ></span>
+              <header class="story-hud" id="storyHud">
+                <div class="hud-item">
+                  <span class="k">日期</span><span class="v" data-bind="world.当前日期">—</span>
+                </div>
+                <div class="hud-item">
+                  <span class="k">时间</span><span class="v" data-bind="world.当前时间">—</span>
+                </div>
+                <div class="hud-item"><span class="k">天气</span><span class="v" data-bind="world.天气">—</span></div>
+                <div class="hud-item long">
+                  <span class="k">当前位置</span><span class="v" data-bind="world.当前位置">—</span>
+                </div>
+                <div class="hud-item coins">
+                  <span class="k">金钱</span>
+                  <span class="coin myth">秘银币 <span data-bind="world.金钱.秘银币">0</span></span>
+                  <span class="coin plat">铂金币 <span data-bind="world.金钱.铂金币">0</span></span>
+                  <span class="coin gold">金币 <span data-bind="world.金钱.金币">0</span></span>
+                  <span class="coin silv">银币 <span data-bind="world.金钱.银币">0</span></span>
+                  <span class="coin copp">铜币 <span data-bind="world.金钱.铜币">0</span></span>
+                </div>
+                <div class="hud-item"><span class="k">声望</span><span class="v" data-bind="world.声望">—</span></div>
+              </header>
+              <div class="story-scroll">
+                <div class="paper-head">
+                  <h2>剧情 <span class="star">✦</span></h2>
+                </div>
+                <div class="paper-body" id="storyPaperBody">
+                  <p class="dropcap">
+                    雨夜的钟声敲过第九下，铁壶酒馆门前停住了一辆没有纹章的马车。你推开窗板，只见车夫递来一封封蜡信，信上烙着北道商会的旧印记。
+                  </p>
+                  <p>
+                    信中写道：若你愿意在今夜接纳一位"无名客"，明晨便可获得冬祭采购清单。它足以让你的小酒馆在三周内跻身城南最繁忙的夜馆之一。
+                  </p>
+                  <p>但与此同时，守夜队也在追查这位无名客。你的选择，可能改变接下来所有势力对你的态度。</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="page" id="tavern">
+              <div class="paper-head">
+                <h2>酒馆 <span class="star">✦</span></h2>
+              </div>
+              <div class="paper-body">
+                <section class="panel">
+                  <h3>酒馆基础设定</h3>
+                  <div class="kv">
+                    <div><span>名称</span><strong data-bind="tavern.名称">—</strong></div>
+                    <div><span>所在城市</span><strong data-bind="tavern.所在城市">—</strong></div>
+                    <div><span>整体风格</span><strong data-bind="tavern.整体风格">—</strong></div>
+                  </div>
+                </section>
+                <section class="panel" style="margin-top: 12px">
+                  <h3>区域</h3>
+                  <div class="region-unified" id="tavernRegions"></div>
+                </section>
+                <section class="panel" style="margin-top: 12px">
+                  <h3>进行中的制作</h3>
+                  <div class="brew-list" id="brewList"></div>
+                </section>
+                <section class="panel ff-panel" style="margin-top: 12px">
+                  <h3>经营快进</h3>
+                  <p class="ff-hint">只填<strong>要跳过的小时数</strong>，生成一段给叙事 AI 的提示。</p>
+                  <div class="ff-row">
+                    <label for="ffHours">跳过</label
+                    ><input type="number" id="ffHours" class="ff-hours" min="1" max="48" value="3" step="1" /><span
+                      >小时</span
+                    ><button type="button" class="ff-skip-btn" id="ffRunBtn">⏩ 生成叙事提示</button>
+                  </div>
+                </section>
+                <section class="panel visitor-panel" style="margin-top: 12px">
+                  <h3>访客骰（村庄版）</h3>
+                  <p class="visitor-hint">按规则投掷 <strong>1d10000</strong>，四位 ABCD 解码为标签包。</p>
+                  <button type="button" class="visitor-roll-btn" id="visitorRollBtn">🎲 投掷 1d10000</button>
+                </section>
+              </div>
+            </article>
+
+            <article class="page" id="inventory">
+              <div class="paper-head">
+                <h2>库存 <span class="star">✦</span></h2>
+              </div>
+              <div class="paper-body">
+                <div class="inv-filter" id="invFilter">
+                  <button class="inv-tab active" data-cat="全部">全部</button>
+                  <button class="inv-tab" data-cat="食材">食材</button>
+                  <button class="inv-tab" data-cat="调料">调料</button>
+                  <button class="inv-tab" data-cat="成品">成品</button>
+                  <button class="inv-tab" data-cat="其他">其他</button>
+                </div>
+                <div id="invMatBlock" class="inv-mat-block"><div class="inv-chip-grid" id="invMatGrid"></div></div>
+                <div id="invTableWrap">
+                  <table class="inv-table">
+                    <thead>
+                      <tr>
+                        <th>物品名</th>
+                        <th>数量</th>
+                        <th>售价</th>
+                        <th>分类</th>
+                      </tr>
+                    </thead>
+                    <tbody id="invRows"></tbody>
+                  </table>
+                </div>
+                <div class="inv-actions">
+                  <button type="button" class="inv-act-btn" data-action="cook">🥘 做菜</button>
+                  <button type="button" class="inv-act-btn" data-action="sauce">🫙 做酱</button>
+                  <button type="button" class="inv-act-btn" data-action="drink">🍷 做喝的</button>
+                  <button type="button" class="inv-act-btn inv-act-btn--serve" data-action="serve">🍽️ 上菜结账</button>
+                  <button type="button" class="inv-clear" id="invClearSel">清空选择</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="page" id="shopping">
+              <div class="paper-head">
+                <h2>购物 <span class="star">✦</span></h2>
+              </div>
+              <div class="paper-body">
+                <p class="shop-tagline">铜板与铂币的流转，从一只篮子开始。</p>
+                <div class="shop-tabs" id="shopTabs" role="tablist"></div>
+                <div class="shop-banner" id="shopBanner">
+                  <div class="shop-banner-meta">
+                    <div class="shop-banner-name" id="shopBannerName">—</div>
+                    <div class="shop-banner-loc" id="shopBannerLoc">📍 —</div>
+                  </div>
+                </div>
+                <div class="shop-grid">
+                  <section class="shop-products-wrap">
+                    <h3 class="shop-h3">货品</h3>
+                    <div class="shop-products" id="shopProducts"></div>
+                  </section>
+                  <aside class="shop-cart-wrap">
+                    <h3 class="shop-h3">购物篮</h3>
+                    <div class="shop-cart" id="shopCart"></div>
+                    <div class="shop-cart-foot">
+                      <div class="shop-total">
+                        <span class="shop-total-k">合计</span><span class="shop-total-v" id="shopCartTotal">0铜</span>
+                      </div>
+                      <button class="inv-act-btn shop-pay-btn" id="shopGenerate">🧾 结账并入库</button
+                      ><button class="inv-clear" id="shopClearCart">清空购物篮</button>
+                    </div>
+                  </aside>
+                </div>
+              </div>
+            </article>
+
+            <article class="page" id="ledger">
+              <div class="paper-head">
+                <h2>账本 <span class="star">✦</span></h2>
+              </div>
+              <div class="paper-body">
+                <p class="ledger-tagline" id="ledgerTagline">铁壶酒馆 · 自开张以来的累计回响。</p>
+                <h3 class="ledger-h3">经营足迹</h3>
+                <div class="stat-grid" id="ledgerStats"></div>
+                <h3 class="ledger-h3">金银流转</h3>
+                <div class="stat-grid" id="ledgerIncome"></div>
+                <h3 class="ledger-h3">当前总资产</h3>
+                <div class="asset-card" id="ledgerAssets"></div>
+              </div>
+            </article>
+
+            <article class="page" id="profile">
+              <div class="paper-head">
+                <h2>玩家档案 <span class="star">✦</span></h2>
+              </div>
+              <div class="paper-body" id="profileBody">
+                <section class="profile-hero">
+                  <div class="profile-avatar-wrap">
+                    <button type="button" class="profile-avatar" id="profileAvatarBtn" aria-label="点击上传头像">
+                      <span class="profile-avatar-glyph" aria-hidden="true">👩‍🍳</span
+                      ><span class="profile-avatar-overlay"
+                        ><span class="profile-avatar-overlay-icon">📷</span
+                        ><span class="profile-avatar-overlay-text">点击更换</span></span
+                      >
+                    </button>
+                    <button type="button" class="profile-avatar-reset" id="profileAvatarReset" hidden>×</button>
+                    <input type="file" accept="image/*" id="profileAvatarInput" hidden />
+                  </div>
+                  <div class="profile-id">
+                    <h3 class="profile-name">—</h3>
+                    <div class="profile-meta"></div>
+                    <p class="profile-tagline"></p>
+                  </div>
+                </section>
+                <div id="profileDynamicContent"></div>
+              </div>
+            </article>
+
+            <article class="page" id="roles">
+              <div class="paper-head">
+                <h2>角色 <span class="star">✦</span></h2>
+              </div>
+              <div class="paper-body">
+                <section class="roles-list-view" id="rolesListView">
+                  <p class="role-list-tagline">铁壶酒馆周遭的人物速写。</p>
+                  <div class="role-card-grid" id="roleCardGrid"></div>
+                </section>
+                <section class="roles-detail-view" id="rolesDetailView" hidden>
+                  <button type="button" class="role-back-btn" id="roleBackBtn">← 返回列表</button>
+                  <div id="roleDetailContent"></div>
+                </section>
+              </div>
+            </article>
+
+            <article class="page" id="map">
+              <div class="paper-head">
+                <h2>地图 <span class="star">✦</span></h2>
+              </div>
+              <div class="paper-body">
+                <p class="map-tagline">拖拽平移，滚轮缩放，双击复位。点击节点查看详情。</p>
+                <div class="map-toolbar">
+                  <button type="button" class="map-tool-btn" id="mapBackToPlayer">📍 回到玩家</button>
+                </div>
+                <div class="map-canvas-wrap">
+                  <svg id="worldMap" class="world-map" viewBox="-7000 -9750 16250 19250">
+                    <defs>
+                      <pattern id="mapDots" x="0" y="0" width="200" height="200" patternUnits="userSpaceOnUse">
+                        <circle cx="10" cy="10" r="10" fill="rgba(111,74,33,.06)" />
+                      </pattern>
+                    </defs>
+                    <rect x="-8750" y="-12500" width="20000" height="27500" fill="url(#mapDots)" />
+                    <g id="mapGrid" class="map-grid"></g>
+                    <g id="mapEdges" class="map-edges"></g>
+                    <g id="mapNodes" class="map-nodes"></g>
+                  </svg>
+                </div>
+                <div class="map-detail" id="mapDetail"></div>
+              </div>
+            </article>
+
+            <article class="page" id="farming">
+              <div class="paper-head">
+                <h2>农田 <span class="star">✦</span></h2>
+              </div>
+              <div class="paper-body">
+                <p class="map-tagline">后院的菜地。种下去的希望，长出来的就是生活。</p>
+                <div class="panel">
+                  <h3>作物状态</h3>
+                  <div id="farmList" style="display: grid; gap: 6px; margin-top: 6px"></div>
+                </div>
+                <div class="panel" style="margin-top: 12px">
+                  <h3>种新作物</h3>
+                  <button type="button" class="inv-act-btn" id="farmPlantBtn">🌱 跟 AI 说要种什么</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="page" id="brewing">
+              <div class="paper-head">
+                <h2>酿酒 <span class="star">✦</span></h2>
+              </div>
+              <div class="paper-body">
+                <p class="map-tagline">时间是好酒最好的朋友。</p>
+                <div class="panel">
+                  <h3>酿造中</h3>
+                  <div id="brewList" style="display: grid; gap: 6px; margin-top: 6px"></div>
+                </div>
+                <div class="panel" style="margin-top: 12px">
+                  <h3>封新桶</h3>
+                  <button type="button" class="inv-act-btn" id="brewStartBtn">🍺 跟 AI 说要酿什么</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="page" id="construction">
+              <div class="paper-head">
+                <h2>建造 <span class="star">✦</span></h2>
+              </div>
+              <div class="paper-body">
+                <p class="map-tagline">一砖一瓦，把酒馆建成你想要的样子。</p>
+                <div class="panel">
+                  <h3>区域列表</h3>
+                  <div id="constructionRegions" style="display: grid; gap: 6px; margin-top: 6px"></div>
+                </div>
+                <div class="panel" style="margin-top: 12px">
+                  <h3>扩建/升级</h3>
+                  <button type="button" class="inv-act-btn" id="buildAddBtn">🔨 告诉 AI 想建什么</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="page" id="employees">
+              <div class="paper-head">
+                <h2>员工 <span class="star">✦</span></h2>
+              </div>
+              <div class="paper-body">
+                <p class="map-tagline">一个人撑不了一间酒馆。</p>
+                <div class="panel">
+                  <h3>当前员工</h3>
+                  <div id="employeeList" style="display: grid; gap: 6px; margin-top: 6px"></div>
+                </div>
+              </div>
+            </article>
+
+            <article class="page" id="business">
+              <div class="paper-head">
+                <h2>产业 <span class="star">✦</span></h2>
+              </div>
+              <div class="paper-body">
+                <p class="map-tagline">从一间厨房到一个小小的商业网络。</p>
+                <div id="businessList" style="display: grid; gap: 6px"></div>
+              </div>
+            </article>
+
+            <article class="page" id="adventure">
+              <div class="paper-head">
+                <h2>冒险 <span class="star">✦</span></h2>
+              </div>
+              <div class="paper-body">
+                <p class="map-tagline">深界——地表之下的广袤平行世界。越深越壮丽、越危险、资源越稀有。</p>
+                <div id="adventureRealmList" style="display: grid; gap: 8px">
+                  <!-- 由 script.ts 渲染层域卡片 -->
+                </div>
+                <div class="panel" style="margin-top: 12px">
+                  <h3>自由出发</h3>
+                  <p style="font-size: calc(11px * var(--text-scale, 1)); color: var(--ink-dim); margin: 0 0 8px">
+                    输入目的地名称（层域名、城市名或任意地点），AI 会帮你展开冒险叙事。
+                  </p>
+                  <button type="button" class="inv-act-btn" id="adventureGoBtn">⚔️ 跟 AI 说想去哪冒险</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="page" id="relationships">
+              <div class="paper-head">
+                <h2>关系 <span class="star">✦</span></h2>
+              </div>
+              <div class="paper-body">
+                <p class="map-tagline">那些人——从推门进来开始，就再也不是陌生人了。</p>
+                <div id="relationList" style="display: grid; gap: 8px"></div>
+              </div>
+            </article>
+
+            <article class="page" id="debug">
+              <div class="paper-head">
+                <h2>调试 <span class="star">✦</span></h2>
+              </div>
+              <div class="paper-body">
+                <div class="debug-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px">
+                  <div style="display: grid; gap: 10px; align-content: start">
+                    <section class="panel">
+                      <h3>存档 JSON</h3>
+                      <p
+                        class="debug-hint"
+                        style="
+                          font-size: calc(10px * var(--text-scale, 1));
+                          color: var(--ink-faint);
+                          margin: 0 0 6px;
+                          font-style: italic;
+                        "
+                      >
+                        当前 chat 变量的完整快照（只读）。
+                      </p>
+                      <textarea
+                        id="debugSaveJson"
+                        style="
+                          width: 100%;
+                          min-height: 260px;
+                          max-height: 400px;
+                          resize: vertical;
+                          box-sizing: border-box;
+                          border-radius: 8px;
+                          border: 1px solid rgba(111, 74, 33, 0.32);
+                          background: rgba(12, 8, 6, 0.5);
+                          color: #f5ebd8;
+                          font-size: calc(11px * var(--text-scale, 1));
+                          line-height: 1.4;
+                          padding: 8px 10px;
+                          font-family: monospace;
+                        "
+                        spellcheck="false"
+                        readonly
+                      ></textarea>
+                      <div style="display: flex; gap: 6px; margin-top: 6px; flex-wrap: wrap">
+                        <button type="button" class="inv-act-btn" id="debugRefreshSave">🔄 刷新</button>
+                        <button type="button" class="inv-act-btn" id="debugCopySave">📋 复制</button>
+                      </div>
+                    </section>
+                    <section class="panel">
+                      <h3>导入 / 导出存档</h3>
+                      <p
+                        class="debug-hint"
+                        style="
+                          font-size: calc(10px * var(--text-scale, 1));
+                          color: var(--ink-faint);
+                          margin: 0 0 6px;
+                          font-style: italic;
+                        "
+                      >
+                        导出为 .json 文件，或导入备份恢复。
+                      </p>
+                      <div style="display: flex; gap: 6px; flex-wrap: wrap">
+                        <button type="button" class="inv-act-btn" id="debugExportSave">📥 导出存档</button>
+                        <label class="inv-act-btn" style="cursor: pointer; margin: 0"
+                          >📤 导入存档<input type="file" id="debugImportInput" accept=".json" style="display: none"
+                        /></label>
+                      </div>
+                    </section>
+                  </div>
+                  <div style="display: grid; gap: 10px; align-content: start">
+                    <section class="panel">
+                      <h3>最近 Action 日志</h3>
+                      <p
+                        class="debug-hint"
+                        style="
+                          font-size: calc(10px * var(--text-scale, 1));
+                          color: var(--ink-faint);
+                          margin: 0 0 6px;
+                          font-style: italic;
+                        "
+                      >
+                        最近 20 条引擎操作记录。
+                      </p>
+                      <div
+                        id="debugActionLog"
+                        style="
+                          max-height: 160px;
+                          overflow-y: auto;
+                          border-radius: 8px;
+                          border: 1px solid rgba(111, 74, 33, 0.24);
+                          background: rgba(12, 8, 6, 0.4);
+                          padding: 6px 8px;
+                          font-size: calc(10px * var(--text-scale, 1));
+                          color: #d4c19c;
+                          line-height: 1.5;
+                          font-family: monospace;
+                          min-height: 48px;
+                        "
+                      >
+                        <span style="opacity: 0.45">暂无日志……</span>
+                      </div>
+                    </section>
+                    <section class="panel">
+                      <h3>局势摘要预览</h3>
+                      <p
+                        class="debug-hint"
+                        style="
+                          font-size: calc(10px * var(--text-scale, 1));
+                          color: var(--ink-faint);
+                          margin: 0 0 6px;
+                          font-style: italic;
+                        "
+                      >
+                        当前注入给 AI 的上下文快照。
+                      </p>
+                      <textarea
+                        id="debugSituation"
+                        style="
+                          width: 100%;
+                          min-height: 120px;
+                          max-height: 200px;
+                          resize: vertical;
+                          box-sizing: border-box;
+                          border-radius: 8px;
+                          border: 1px solid rgba(111, 74, 33, 0.32);
+                          background: rgba(12, 8, 6, 0.5);
+                          color: #f5ebd8;
+                          font-size: calc(11px * var(--text-scale, 1));
+                          line-height: 1.4;
+                          padding: 8px 10px;
+                          font-family: monospace;
+                        "
+                        spellcheck="false"
+                        readonly
+                      ></textarea>
+                      <button type="button" class="inv-act-btn" style="margin-top: 6px" id="debugRefreshSituation">
+                        🔄 刷新
+                      </button>
+                    </section>
+                    <section class="panel">
+                      <h3>健康检查</h3>
+                      <p
+                        class="debug-hint"
+                        style="
+                          font-size: calc(10px * var(--text-scale, 1));
+                          color: var(--ink-faint);
+                          margin: 0 0 6px;
+                          font-style: italic;
+                        "
+                      >
+                        金钱非负、引用完整性、标签有效性。
+                      </p>
+                      <div
+                        id="debugHealthResult"
+                        style="
+                          border-radius: 8px;
+                          border: 1px solid rgba(111, 74, 33, 0.24);
+                          background: rgba(12, 8, 6, 0.4);
+                          padding: 8px;
+                          min-height: 40px;
+                          font-size: calc(10px * var(--text-scale, 1));
+                          line-height: 1.5;
+                          font-family: monospace;
+                        "
+                      >
+                        <span style="opacity: 0.45">点击下方按钮执行检查……</span>
+                      </div>
+                      <button type="button" class="inv-act-btn" style="margin-top: 6px" id="debugRunHealth">
+                        🩺 执行健康检查
+                      </button>
+                    </section>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <footer class="output-dock" id="outputDock">
+            <div class="output-dock-head">
+              <label class="output-dock-title" for="globalOutput">输出区</label
+              ><button type="button" class="output-dock-copy" id="globalOutputCopy">📋 复制</button>
+            </div>
+            <textarea id="globalOutput" class="global-output-text" spellcheck="false"></textarea>
+          </footer>
+        </section>
+      </div>
+    </div>
+  </div>
+  <button type="button" class="settings-btn" id="settingsBtn" aria-label="设置">
+    <svg viewBox="0 0 24 24">
+      <path
+        d="M19.14 12.94a7.49 7.49 0 0 0 .05-.94 7.49 7.49 0 0 0-.05-.94l2.03-1.58a.5.5 0 0 0 .12-.64l-1.92-3.32a.5.5 0 0 0-.61-.22l-2.39.96a7 7 0 0 0-1.62-.94l-.36-2.54a.5.5 0 0 0-.5-.42h-3.84a.5.5 0 0 0-.5.42l-.36 2.54a7 7 0 0 0-1.62.94l-2.39-.96a.5.5 0 0 0-.61.22L2.66 8.84a.5.5 0 0 0 .12.64l2.03 1.58a7.49 7.49 0 0 0 0 1.88L2.78 14.52a.5.5 0 0 0-.12.64l1.92 3.32a.5.5 0 0 0 .61.22l2.39-.96a7 7 0 0 0 1.62.94l.36 2.54a.5.5 0 0 0 .5.42h3.84a.5.5 0 0 0 .5-.42l.36-2.54a7 7 0 0 0 1.62-.94l2.39.96a.5.5 0 0 0 .61-.22l1.92-3.32a.5.5 0 0 0-.12-.64zM12 15.5A3.5 3.5 0 1 1 15.5 12 3.5 3.5 0 0 1 12 15.5z"
+      />
+    </svg>
+  </button>
+  <!-- webpack 自动注入 index.js -->
+</body>

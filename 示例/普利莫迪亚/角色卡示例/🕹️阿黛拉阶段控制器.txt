@@ -1,0 +1,25 @@
+@@preprocessing
+<%
+if (typeof adailaAffection === 'undefined') var adailaAffection = getvar('stat_data.配角.阿黛拉.亲密度', { defaults: 1 });
+var adailaExists = getvar('stat_data.配角.阿黛拉', { defaults: null });
+%>
+
+<% if (adailaExists !== null) { %>
+<% if (adailaAffection == 1) { %>
+<%- await getwi('🕹️阿黛拉阶段_1_审视') %>
+<% } else if (adailaAffection == 2) { %>
+<%- await getwi('🕹️阿黛拉阶段_2_放行') %>
+<% } else if (adailaAffection == 3) { %>
+<%- await getwi('🕹️阿黛拉阶段_3_在场') %>
+<% } else if (adailaAffection == 4) { %>
+<%- await getwi('🕹️阿黛拉阶段_4_失算') %>
+<% } else if (adailaAffection == 5) { %>
+<%- await getwi('🕹️阿黛拉阶段_5_两难') %>
+<% } else if (adailaAffection == 6) { %>
+<%- await getwi('🕹️阿黛拉阶段_6_交底') %>
+<% } else if (adailaAffection == 7) { %>
+<%- await getwi('🕹️阿黛拉阶段_7_初学') %>
+<% } else if (adailaAffection == 8) { %>
+<%- await getwi('🕹️阿黛拉阶段_8_放手') %>
+<% } %>
+<% } %>

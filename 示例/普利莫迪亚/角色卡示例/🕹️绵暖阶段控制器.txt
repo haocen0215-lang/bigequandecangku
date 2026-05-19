@@ -1,0 +1,25 @@
+@@preprocessing
+<%
+if (typeof miannuaAffection === 'undefined') var miannuaAffection = getvar('stat_data.配角.绵暖.亲密度', { defaults: 1 });
+var miannuaExists = getvar('stat_data.配角.绵暖', { defaults: null });
+%>
+
+<% if (miannuaExists !== null) { %>
+<% if (miannuaAffection == 1) { %>
+<%- await getwi('🕹️绵暖阶段_1_初访') %>
+<% } else if (miannuaAffection == 2) { %>
+<%- await getwi('🕹️绵暖阶段_2_常客') %>
+<% } else if (miannuaAffection == 3) { %>
+<%- await getwi('🕹️绵暖阶段_3_心安') %>
+<% } else if (miannuaAffection == 4) { %>
+<%- await getwi('🕹️绵暖阶段_4_不自知') %>
+<% } else if (miannuaAffection == 5) { %>
+<%- await getwi('🕹️绵暖阶段_5_自知') %>
+<% } else if (miannuaAffection == 6) { %>
+<%- await getwi('🕹️绵暖阶段_6_托付') %>
+<% } else if (miannuaAffection == 7) { %>
+<%- await getwi('🕹️绵暖阶段_7_坦诚') %>
+<% } else if (miannuaAffection == 8) { %>
+<%- await getwi('🕹️绵暖阶段_8_归属') %>
+<% } %>
+<% } %>

@@ -1,0 +1,232 @@
+变量更新规则:
+  世界:
+    当前日期:
+      check:
+        - 仅在剧情中明确经过睡眠、长途旅行、跨日事件或玩家声明推进日历时更新，保持历法自洽
+    当前时间:
+      check:
+        - 随场景内活动消耗、休息、营业起止等合理推进，24 小时制字符串应与日期一起自洽
+    天气:
+      check:
+        - 仅当场景描写或系统事件明确改变室外/店内体感天气时更新
+    当前位置:
+      check:
+        - 仅当角色实际移动到新城市、建筑或区域时更新，格式建议「城市 · 场所 · 区域」
+    声望:
+      check:
+        - 在公开事迹、顾客口碑、任务结果或势力态度变化被提及时才调整，避免每句闲聊都改
+    金钱:
+      秘银币:
+        type: number
+        check: &chk_money_coin
+          - 收入与支出须有叙事或操作来源；大额变化应在同回合说明理由
+          - 任一面额不得被 patch 成负数；delta 时与账本.当前总资产对应面额及折算合计铜币保持一致
+      铂金币:
+        type: number
+        check: *chk_money_coin
+      金币:
+        type: number
+        check: *chk_money_coin
+      银币:
+        type: number
+        check: *chk_money_coin
+      铜币:
+        type: number
+        check: *chk_money_coin
+  酒馆:
+    名称:
+      check:
+        - 仅当正式更名、产权交割或剧情明确改名时修改
+    所在城市:
+      check:
+        - 仅当酒馆整体搬迁或设定变更时修改
+    整体风格:
+      check:
+        - 仅当大规模装修或长期经营改变氛围时修改
+    区域列表:
+      type: |-
+        {
+          [区域名: string]: {
+            状态: string;
+            描述: string;
+            设施标签: string[];
+            子空间: {
+              [子空间名: string]: { 状态: string; 描述: string };
+            };
+          };
+        }
+      check:
+        - 新增区域或子空间须有剧情或建设依据；remove 某区域前应确认无进行中的制作仍指向该区域
+        - 状态与描述应反映当前剧情中的卫生、损坏、客流等，而非重复同一句
+    进行中的制作:
+      type: |-
+        {
+          [制作物名: string]: {
+            容器: string;
+            所在区域: string;
+            当前状态: string;
+            开始: string;
+            预计完成: string;
+            剩余量感: string;
+          };
+        }
+      check:
+        - 开始与预计完成须为「哪一天、什么时段」式自然语言，便于模型理解
+        - 剩余量感用口语化剩余量感（如「大约还有两天」「绿涨月十八日前后能取」），不写精确到秒的倒计时
+        - 完成或废弃时用 replace 更新当前状态并清空或改写剩余量感，必要时 remove 整条
+  库存:
+    type: |-
+      {
+        [物品名: string]: {
+          数量: number;
+          单位: string;
+          分类: '食材' | '调料' | '成品' | '其他';
+          售价铜币: number;
+          风味标签: string[];
+          烹饪手法: string;
+        };
+      }
+    check:
+        - 采购、消耗、做菜、上菜、丢弃、变质等事件才改数量；数量不得为负
+        - 售价与风味标签、烹饪手法在成品定型或菜单变更时更新
+  购物.店铺列表:
+    type: |-
+      {
+        [店铺名: string]: {
+          所在位置: string;
+          描述: string;
+          商品列表: {
+            [商品名: string]: {
+              分类: '食材' | '调料' | '成品' | '其他';
+              单位: string;
+              单价铜币: number;
+              备注: string;
+            };
+          };
+        };
+      }
+    check:
+        - 进货价波动、季节缺货、剧情封锁店铺时改商品或单价；避免无由大幅改价
+  账本:
+    经营足迹.累计营业天数:
+      type: number
+      check:
+        - 仅在实际跨过完整营业日或叙事声明「又过了一天」且对经营有意义时 +1 或小步 delta
+    经营足迹.累计接待客人数:
+      type: number
+      check:
+        - 与当日/当场次实际接待描写一致，单次 delta 不宜超过合理客流上限
+    经营足迹.累计客房入住:
+      type: number
+      check:
+        - 有人入住并过夜才增加，可与剧情中客房状态联动
+    金银流转.累计总收入铜币:
+      type: number
+      check:
+        - 仅在有明确营业收入时 delta，退款则负 delta；与「世界.金钱」支出收入自洽
+    当前总资产:
+      秘银币:
+        type: number
+        check: &chk_ledger_asset
+          - 与「世界.金钱」及汇率规则同步；五档变动后折算合计铜币须重算或一并 replace
+      铂金币:
+        type: number
+        check: *chk_ledger_asset
+      金币:
+        type: number
+        check: *chk_ledger_asset
+      银币:
+        type: number
+        check: *chk_ledger_asset
+      铜币:
+        type: number
+        check: *chk_ledger_asset
+      折算合计铜币:
+        type: number
+        check:
+          - 与五档持有及约定汇率一致；避免与世界.金钱总和矛盾
+  玩家:
+    基本信息:
+      姓名:
+        check:
+          - 仅在角色卡级设定变更、正式改名或玩家声明时修改
+      种族:
+        check:
+          - 仅在设定变更或剧情明确改变种族表述时修改
+      头像:
+        check:
+          - 随展示符号或头像说明剧情化更新
+      称号:
+        check:
+          - 在获得或剥夺称号的剧情节点更新
+      简介标语:
+        check:
+          - 身份或立场显著变化时整段 replace
+      年龄:
+        type: number
+        check:
+          - 同回合内变化不超过 1，除非有魔法或跳跃时间线等明确设定
+    状态:
+      生命值:
+        当前:
+          type: number
+          check:
+            - 受伤、治疗、休息影响下更新；不为负且不超过上限
+        上限:
+          type: number
+          check:
+            - 仅长期锻炼或体质剧情明确提高上限时增加
+      精力:
+        当前:
+          type: number
+          check:
+            - 劳累、睡眠、饮食、药物影响下更新；不为负且不超过上限
+        上限:
+          type: number
+          check:
+            - 同生命值上限，显著养成事件才可增
+    烹饪等级:
+      等级:
+        type: number
+        check:
+          - 达升级所需次数与叙事条件后 +1；避免跳级
+      等级称号:
+        check:
+          - 须与等级数值一致后 replace
+      下一级称号:
+        check:
+          - 随等级表 replace
+      累计做菜次数:
+        type: number
+        check:
+          - 成功完成与等级相称菜式后可 +1
+      升级所需次数:
+        type: number
+        check:
+          - 升级时随新等级调整目标次数
+    当前穿着:
+      check:
+        - 换装、破损、赠送、偷窃等剧情发生时整段 replace；保持单段文字，不拆字段
+  角色:
+    type: |-
+      {
+        [角色id: string]: {
+          显示名: string;
+          种族: string;
+          年龄: number;
+          性别: '男' | '女' | '其他';
+          当前位置: string;
+          头像: string;
+          简介标语: string;
+          穿着: string;
+          精力状态: string;
+          膀胱值: { 当前: number; 上限: number };
+          亲密度阶段: number;
+          亲密度描述: string;
+          好感度: { 当前: number; 上限: number };
+        };
+      }
+    check:
+        - 键为稳定 id，勿改键；改名用 replace 显示名
+        - 好感度与亲密度阶段可分别变化，业务上若需「满好感才升阶」由模型遵守本条目与角色设定，不在此写死公式
+        - 膀胱值.当前随饮水、如厕、长时间忙碌在 0~100 内合理波动

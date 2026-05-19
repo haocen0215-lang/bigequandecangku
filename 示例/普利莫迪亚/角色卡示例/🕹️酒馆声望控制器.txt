@@ -1,0 +1,16 @@
+@@preprocessing
+<%
+if (typeof tavernReputation === 'undefined') var tavernReputation = getvar('stat_data.酒馆经营.声望名', { defaults: '无人知晓' });
+%>
+
+<% if (tavernReputation === '无人知晓') { %>
+<%- await getwi('🕹️酒馆声望_1_无人知晓') %>
+<% } else if (tavernReputation === '略有耳闻') { %>
+<%- await getwi('🕹️酒馆声望_2_略有耳闻') %>
+<% } else if (tavernReputation === '小有名气') { %>
+<%- await getwi('🕹️酒馆声望_3_小有名气') %>
+<% } else if (tavernReputation === '远近闻名') { %>
+<%- await getwi('🕹️酒馆声望_4_远近闻名') %>
+<% } else if (tavernReputation === '声名远扬') { %>
+<%- await getwi('🕹️酒馆声望_5_声名远扬') %>
+<% } %>

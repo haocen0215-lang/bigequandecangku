@@ -1,0 +1,30 @@
+@@preprocessing
+<%
+if (typeof monthName === 'undefined') var monthName = getvar('stat_data.世界状态.月份名', { defaults: '解冻月' });
+%>
+
+<% if (monthName === '冰封月') { %>
+<%- await getwi('⛅天气_冰封月') %>
+<% } else if (monthName === '残雪月') { %>
+<%- await getwi('⛅天气_残雪月') %>
+<% } else if (monthName === '解冻月') { %>
+<%- await getwi('⛅天气_解冻月') %>
+<% } else if (monthName === '花萌月') { %>
+<%- await getwi('⛅天气_花萌月') %>
+<% } else if (monthName === '绿涨月') { %>
+<%- await getwi('⛅天气_绿涨月') %>
+<% } else if (monthName === '长日月') { %>
+<%- await getwi('⛅天气_长日月') %>
+<% } else if (monthName === '炎阳月') { %>
+<%- await getwi('⛅天气_炎阳月') %>
+<% } else if (monthName === '收获月') { %>
+<%- await getwi('⛅天气_收获月') %>
+<% } else if (monthName === '金叶月') { %>
+<%- await getwi('⛅天气_金叶月') %>
+<% } else if (monthName === '落穗月') { %>
+<%- await getwi('⛅天气_落穗月') %>
+<% } else if (monthName === '霜降月') { %>
+<%- await getwi('⛅天气_霜降月') %>
+<% } else if (monthName === '暗夜月') { %>
+<%- await getwi('⛅天气_暗夜月') %>
+<% } %>
