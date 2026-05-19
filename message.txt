@@ -1,0 +1,94 @@
+游戏类型： 奇幻酒馆经营 + 剧情向文字冒险的辅助面板：酒馆、普利莫迪亚世界、库存与烹饪、购物、经营账本、玩家与 NPC 档案、大地图等；重心在「酒馆与物资、人物、叙事」
+美学风格：页面标题与结构是 「泥金羊皮卷」式 UI：羊皮纸色、泥金/木色外框、角花、卷轴感侧栏与纸面内容区；多主题在 CSS 里切换，整体是 中世纪奇幻账本 / 编年录，
+包含内容：剧情：顶栏世界状态 + 正文区（接 <maintext> 等）
+酒馆：设定、区域与状态、经营快进、访客骰等
+库存：分类、选量、上菜/做菜等（含烹饪手法面板）
+购物：多店铺、购物篮、结账叙事输出
+账本：经营足迹、金银流转、资产与铜币折算展示
+玩家档案：基本信息、生命/精力、烹饪等级、穿着等
+角色：列表与详情（与酒馆 NPC 向设定一致）
+地图：大地图交互区
+底部输出区、界面设置等辅助
+「酒馆 + 仓库式经营 + 人物」 的一套界面
+我需要制作一个可能包含多个交互元素/界面/模态框的复杂页面。该页面用于llm交互为基础的文字交互游戏，请基于这点纳入设计部分。
+必须完整地设计主页面。
+当玩家在主页面，点击具体的交互页面的的时候，请至少展示已经设计完毕，只是无具体内容的模态框/标签页，最好是已经有具体内容（如果上面制定了内容要求的话）。
+除了logo、视觉设计等不影响游戏体验的地方，做好全中文化。
+1.核心:使用HTML构建结构，使用 Javascript处理逻辑。
+2.样式(CSS):使用VanillaCSS以获得最大的灵活性和控制权。第二选择是使用TailwindCSS。
+1.使用丰富的美学:设计应让用户第一眼就感到惊艳。使用现代网页设计的最佳实践(例如鲜艳的色彩、深色模式、玻璃拟态和动态动画)来创造令人惊叹的第一印象。如果做不到这一点，是不可接受的。
+2.优先考虑视觉卓越性:实施能让用户发出“WOW”惊叹并感觉极其高端的设计:
+避免使用通用颜色(纯红、蓝、绿)。使用精心挑选、和谐的调色板(例如HSL定制颜色、时尚的深色模式)。
+使用现代排版(例如Google Fonts中的 Inter、Roboto 或Outfit)，而不是浏览器默认字体。
+-使用平滑的渐变，
+-添加微妙的微交互动画以增强用户体验，
+3.使用动态设计:感觉灵敏且生动的界面能鼓励交互。通过悬停效果和交互元素来实现这一点。特别是微交互动画，对于提高用户参与度非常有效。
+4.高端设计。制作感觉高端且最先进的设计。避免创建简单的最小可行产品。
+5.不要使用占位符。
+6.进行性能优化
+-标题标签:为每个页面包含正确、描述性的标题标签，
+-元描述:添加引人注目且准确总结页面内容的元描述，
+-标题结构:每页使用一个‘<h1>`，并保持正确的标题层级，
+-语义化 HTML:使用适当的HTML5语义元素，
+-唯一 ID:确保所有交互元素具有唯一的、描述性的ID，以便进行浏览器测试，
+-性能:通过优化确保快速的页面加载时间，
+7.禁止使用emoji，而是使用美观、高级的ICON！
+8.除了美术上的设计，否则全游戏的界面、按钮、文本，应当全部显示中文。
+关键提醒:美学非常重要。如果你的Web应用看起来简单基础，那么你就失败了!
+
+Step 1: Analyze User Requirements
+Extract key information from user request:
+Product type: SaaS, e-commerce, portfolio, dashboard, landing page, etc.
+Style keywords: minimal, playful, professional, elegant, dark mode, etc.
+Industry: healthcare, fintech, gaming, education, etc.
+Stack: React, Vue, Next.js, or default to html-tailwind
+Product - Get style recommendations for product type
+Style - Get detailed style guide (colors, effects, frameworks)
+Typography - Get font pairings with Google Fonts imports
+Color - Get color palette (Primary, Secondary, CTA, Background, Text, Border)
+Landing - Get page structure (if landing page)
+Chart - Get chart recommendations (if dashboard/analytics)
+UX - Get best practices and anti-patterns
+Stack - Get stack-specific guidelines (default: html-tailwind)
+Step 3: Stack Guidelines (Default: html-tailwind)
+If user doesn't specify a stack, default to html-tailwind.
+
+
+Available stacks: html-tailwind, react, nextjs, vue, svelte, swiftui, react-native, flutter
+
+Search Reference
+Available Domains
+Domain	Use For	Example Keywords
+product	Product type recommendations	SaaS, e-commerce, portfolio, healthcare, beauty, service
+style	UI styles, colors, effects	glassmorphism, minimalism, dark mode, brutalism
+typography	Font pairings, Google Fonts	elegant, playful, professional, modern
+color	Color palettes by product type	saas, ecommerce, healthcare, beauty, fintech, service
+landing	Page structure, CTA strategies	hero, hero-centric, testimonial, pricing, social-proof
+chart	Chart types, library recommendations	trend, comparison, timeline, funnel, pie
+ux	Best practices, anti-patterns	animation, accessibility, z-index, loading
+prompt	AI prompts, CSS keywords	(style name)
+Available Stacks
+Stack	Focus
+html-tailwind	Tailwind utilities, responsive, a11y (DEFAULT)
+react	State, hooks, performance, patterns
+nextjs	SSR, routing, images, API routes
+vue	Composition API, Pinia, Vue Router
+svelte	Runes, stores, SvelteKit
+swiftui	Views, State, Navigation, Animation
+react-native	Components, Navigation, Lists
+flutter	Widgets, State, Layout, Theming
+Example Workflow
+User request: "Làm landing page cho dịch vụ chăm sóc da chuyên nghiệp"
+
+AI should:
+Tips for Better Results
+Be specific with keywords - "healthcare SaaS dashboard" > "app"
+Search multiple times - Different keywords reveal different insights
+Combine domains - Style + Typography + Color = Complete design system
+Always check UX - Search "animation", "z-index", "accessibility" for common issues
+Use stack flag - Get implementation-specific best practices
+Iterate - If first search doesn't match, try different keywords
+Split Into Multiple Files - For better maintainability:
+Separate components into individual files (e.g., Header.tsx, Footer.tsx)
+Extract reusable styles into dedicated files
+Keep each file focused and under 200-300 lines

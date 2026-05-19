@@ -1447,8 +1447,22 @@ function setupStoryMaintext() {
   const bodyEl = document.getElementById('storyPaperBody');
   if (!bodyEl || typeof getChatMessages !== 'function') return;
   function extractMaintext(raw: string): string {
-    const m = String(raw || '').match(/<maintext>([\s\S]*?)<\/maintext>/i);
-    return m ? m[1].trim() : '';
+    if (!raw) return '';
+    let cleaned = raw.replace(/<thinking>[\s\S]*?<\/thinking>/gi, '');
+    cleaned = cleaned.replace(/<think>[\s\S]*?<\/redacted_reasoning>/gi, '');
+    const thinkingStart = cleaned.search(/<thinking>/i);
+    if (thinkingStart !== -1) {
+      cleaned = cleaned.substring(0, thinkingStart);
+    }
+    const redactedStart = cleaned.search(/<think>/i);
+    if (redactedStart !== -1) {
+      cleaned = cleaned.substring(0, redactedStart);
+    }
+    const matches = cleaned.match(/<maintext>([\s\S]*?)<\/maintext>/gi);
+    if (!matches || matches.length === 0) return '';
+    const last = matches[matches.length - 1];
+    const content = last.match(/<maintext>([\s\S]*?)<\/maintext>/i);
+    return content ? content[1].trim() : '';
   }
   function latestAssistantMessage(): string {
     for (let d = 1; d <= 500; d++) {
