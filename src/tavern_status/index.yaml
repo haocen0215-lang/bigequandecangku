@@ -158,9 +158,9 @@
       启用: true
       查找表达式: <StatusPlaceHolderImpl/>
       内容: |-
-        ```
-        <iframe src="https://testingcf.jsdelivr.net/gh/haocen0215-lang/bigequandecangku/dist/tavern_status/index.html" style="width:100%;height:100vh;border:none;"></iframe>
-        ```
+        <div style="height:100vh;">
+          <iframe src="https://testingcf.jsdelivr.net/gh/haocen0215-lang/bigequandecangku/dist/tavern_status/index.html?v=2" style="width:100%;height:100vh;border:none;"></iframe>
+        </div>
       来源:
         用户输入: false
         AI输出: true
