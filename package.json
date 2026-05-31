@@ -115,11 +115,14 @@
       "javascript-obfuscator",
       "unrs-resolver",
       "vue-demi"
+<<<<<<< HEAD
     ],
     "approvedBuilds": [
       "@parcel/watcher@2.5.6",
       "unrs-resolver@1.11.1",
       "vue-demi@0.14.10"
+=======
+>>>>>>> 1b593ab69d89d2d5d22e9730e0163f19dd209fac
     ]
   }
 }
